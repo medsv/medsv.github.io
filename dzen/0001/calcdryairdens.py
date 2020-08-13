@@ -26,19 +26,19 @@ b = [np.array([0.366812, -0.252712, -0.284986e1, 0.360179e1, -0.318665e1, 0.1540
      np.array([0.116375e-3, 0.361900e-1, -0.195095e-1, -0.379583e-2])]
 
 
-def calc_dryair_dens(p, t):
+def calc_dryair_dens(t, p=101325):
     """
-    :param p: абсолютное давление, Па
     :param t: температура, С
-    :return: плотность, кг/м3
+    :param p: абсолютное давление, Па. Необязательный параметр. По умолчанию принято атмосферное давление
+    :return: плотность, кг/м3; коэффициент сжимаемости
     """
-    if 1000 < t < -100 or 20e6 < p < 0.1e6:
-        raise ValueError('Параметры должны находиться в диапазонах t = [-100; 1000] С,  p = [0,1; 20] МПа')
+    if not (-100 <= t <= 1000 and 0.1e6 <= p <= 20e6):
+        raise ValueError('Параметры должны находиться в диапазонах t = [-100; 1000] С, p = [0,1; 20] МПа')
     T = t + 273.15
     """Газовая постоянная для сухого воздуха, Дж/кг/К"""
     R = 287.1
 
-    def calc_z(p, T, v):
+    def calc_z(T, p, v):
         T_cr = 132.5
         v_cr = 0.00316
         om = v_cr / v
@@ -51,7 +51,7 @@ def calc_dryair_dens(p, t):
 
     def f(z, p, T):
         v = z * R * T / p
-        return z - calc_z(p, T, v)
+        return z - calc_z(T, p, v)
 
     sol = optimize.root_scalar(f, args=(p, T), bracket=[0.4, 1.9])
     return 1 / (sol.root * R * T / p), sol.root
