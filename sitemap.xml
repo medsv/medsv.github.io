@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+	<loc>https://medsv.github.io/index.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0001/calc_dryair_dens.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0001/Плотность_сухого_воздуха.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0002/calc_dryair_dvisc.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0002/Динамическая_вязкость_сухого_воздуха.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0002/Кинематическая_вязкость_сухого_воздуха.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0003/saturation_curve.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0004/calc_ws_dvisc.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0004/Динамическая_вязкость_воды_и_пара.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0004/Кинематическая_вязкость_воды_и_пара.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0005/Коэффициент_сопротивления_по_Kv.html</loc>
+</url>
+</urlset>
