@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head><meta charset="utf-8" />
 
 <title>Определение суммарного коэффициента сопротивления по значению пропускной способности Kv</title>
@@ -13084,8 +13084,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>При проведении гидравлических расчётов для вычисления потерь полного давления в элементе трубопровода необходимо иметь значение его суммарного коэффициента сопротивления, который равен сумме значений коэффициента сопротивления трения и коэффициента местного сопротивления.
-В справочных данных по запорной арматуре в качестве параметра,  характеризующего гидравлическое сопротивление, приводится значение пропускной способности $K_v$.</p>
+<p>При проведении гидравлических расчётов для вычисления потерь полного давления в каком либо элементе трубопровода необходимо иметь значение его суммарного коэффициента сопротивления, который равен сумме значений коэффициента сопротивления трения и коэффициента местного сопротивления.</p>
+<p>В справочных данных по запорной арматуре в качестве параметра,  характеризующего гидравлическое сопротивление, приводится значение пропускной способности $K_v$.</p>
 
 </div>
 </div>
@@ -13093,21 +13093,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Пропускная способность элемента трубопровода ($K_v$) - значение, равное расходу жидкости, $м^3/ч$, плотностью 1000 $кг/м^3$, протекающей через элемент трубопровода при перепаде давления на нём 0,1 МПа.</p>
+<p>Пропускная способность элемента трубопровода $K_v$ - значение, равное расходу жидкости, $м^3/ч$, плотностью 1000 $кг/м^3$, протекающей через элемент трубопровода при перепаде давления на нём 0,1 МПа.</p>
 <p>Потери давления через суммарный коэффициент сопротивления находятся по формуле:</p>
 $$\Delta p = \zeta_{сум} \frac{\rho w^2}{2}, отсюда$$<p>$ $$$\zeta_{сум} = \frac{2 \Delta p}{\rho w^2} \ \ \ \ \ \ (1)$$</p>
 <p>где $\zeta_{сум}$ - искомый суммарный коэффициент сопротивления, $\Delta p = 10^5$ Па (см. определение пропускной способности выше) - потери давления, $\rho=1000$ $кг/м^3$ - плотность среды, $w$ - скорость движения среды плотностью 1000 $кг/м^3$ внутри трубопровода на котором установлен рассматриваемый элемент, $м/с$, при объёмном расходе $K_v$.</p>
 $$w = Q / F,$$<p>где $Q$ - объёмный расход среды, $м^3/c$, $F$ - площадь внутреннего сечения трубопровода на котором установлен рассматриваемый элемент, $м^2$.<br>
-$K_v$ - это объёмный расход в $м^3/ч$, тогда $Q = K_v/3600$.</p>
-$$F = \frac{\pi(D-2h)^2}{4}\cdot 10^{-6},$$<p>где $D$ - внешний димаметр трубопровода, мм; $h$ - толщина стенки трубопровода, мм. Например, трубопровод 108х5: внешний диаметр 108 мм, толщина стенки 5 мм.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Подставив найденные значения в формулу (1) получим:</p>
+$K_v$ - это объёмный расход в $м^3/ч$, тогда $Q = K_v/3600$.
+Подставив выведенные выше выражения в формулу (1), получим:</p>
 $$\zeta_{сум} = \frac{2 \cdot 10^5}{1000}\left(\frac{3600 \cdot F}{K_v}\right)^2$$
 </div>
 </div>
@@ -13149,9 +13141,734 @@ $$\zeta_{сум} = \frac{2 \cdot 10^5}{1000}\left(\frac{3600 \cdot F}{K_v}\right
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>В итоге искомое выражение принимает вид:</p>
-$$\zeta_{сум} = 2592\cdot 10^6 \left(\frac{ F}{K_v}\right)^2$$
+$$\zeta_{сум} = 2592\cdot 10^6 \left(\frac{ F}{K_v}\right)^2$$<p>где $$F = \frac{\pi(D-2h)^2}{4}\cdot 10^{-6},$$</p>
+<p>где $D$ - внешний димаметр трубопровода, мм; $h$ - толщина стенки трубопровода, мм. Например, для трубопровода 108х5: внешний диаметр 108 мм, толщина стенки 5 мм.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1042;&#1099;&#1074;&#1086;&#1076;-&#1092;&#1086;&#1088;&#1084;&#1091;&#1083;&#1099;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#1042;&#1099;&#1074;&#1086;&#1076; &#1092;&#1086;&#1088;&#1084;&#1091;&#1083;&#1099; &#1089; &#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093; &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;<a class="anchor-link" href="#&#1042;&#1099;&#1074;&#1086;&#1076;-&#1092;&#1086;&#1088;&#1084;&#1091;&#1083;&#1099;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#182;</a></h2><p><a href="https://habr.com/ru/post/423731/">https://habr.com/ru/post/423731/</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Обозначения переменных:<br>
+rc - суммарный коэффициент сопротивления $\zeta_{сум}$ (rc - сокращённо от resistance coefficient)<br>
+dp - потери давления $\Delta p$, Па<br>
+rho - плотность $\rho$, $кг/м^3$<br>
+Q - расход, $м^3/с$<br>
+Kv - пропускная способность $K_v$, $м^3/ч$<br>
+w - скорость $w$, $м/с$<br>
+F - площадь внутреннего сечения трубопровода, $м^2$<br>
+D - внешний диаметр трубы, $мм$<br>
+h - толщина стенки трубы, $мм$<br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Создаём символьные переменные</span>
+<span class="n">Q</span><span class="p">,</span> <span class="n">Kv</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;Q K_v w F&#39;</span><span class="p">)</span>
+<span class="n">D</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;D h pi&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dp</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="c1">#из определения Kv, Па</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="c1">#из определения Kv, кг/м3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="mf">1e-6</span>
+<span class="n">F</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle 2.5 \cdot 10^{-7} \pi \left(D - 2 h\right)^{2}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">Kv</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="n">Q</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle \frac{K_{v}}{3600}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">/</span> <span class="n">F</span>
+<span class="n">w</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle \frac{1111.11111111111 K_{v}}{\pi \left(D - 2 h\right)^{2}}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Записываем формулу (1)</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dp</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">w</span> <span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#и выводим окончательный результат</span>
+<span class="n">rc</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle \frac{0.000162 \pi^{2} \left(D - 2 h\right)^{4}}{K_{v}^{2}}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Присваиваем pi числовое значение и обновляем выражения, где фигурировало pi</span>
+<span class="kn">import</span> <span class="nn">math</span> <span class="c1">#возьмём значение pi из модуля math</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> 
+<span class="n">F</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="mf">1e-6</span>
+<span class="n">F</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle 7.85398163397448 \cdot 10^{-7} \left(D - 2 h\right)^{2}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">/</span> <span class="n">F</span>
+<span class="n">w</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle \frac{353.677651315323 K_{v}}{\left(D - 2 h\right)^{2}}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#формула для вычисления суммарного коэффициента сопротивления по Kv</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dp</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">w</span> <span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">rc</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle \frac{0.00159887591297648 \left(D - 2 h\right)^{4}}{K_{v}^{2}}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1055;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1077;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1086;&#1074;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#1055;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1077; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1086;&#1074; &#1089; &#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093; &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;<a class="anchor-link" href="#&#1055;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1077;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1086;&#1074;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Можно найти значение коэффициена сопротивления для конкретных значений Kv, D, h</span>
+<span class="n">rc</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">D</span><span class="p">,</span> <span class="mi">108</span><span class="p">),</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">Kv</span><span class="p">,</span> <span class="mi">100</span><span class="p">)])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle 14.7475223392043$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Зависимость коэффициена сопротивления от Kv для трубопровода 108х5</span>
+<span class="n">rc_Kv</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">D</span><span class="p">,</span> <span class="mi">108</span><span class="p">),</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">rc_Kv</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$\displaystyle \frac{147475.223392043}{K_{v}^{2}}$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Kvs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">rcs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">kv</span> <span class="ow">in</span> <span class="n">Kvs</span><span class="p">:</span>
+    <span class="n">rcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rc_Kv</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Kv</span><span class="p">,</span> <span class="n">kv</span><span class="p">))</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Kvs</span> <span class="c1">#м3/ч</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rcs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[1474.75223392043,
+ 655.445437297970,
+ 368.688058480108,
+ 235.960357427269,
+ 163.861359324492,
+ 120.387937462892,
+ 92.1720146200270,
+ 72.8272708108856,
+ 58.9900893568173,
+ 48.7521399643118,
+ 40.9653398311231,
+ 34.9053783176434,
+ 30.0969843657231,
+ 26.2178174919188,
+ 23.0430036550068,
+ 20.4117956251963,
+ 18.2068177027214,
+ 16.3407449741876,
+ 14.7475223392043]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Создадим таблицу</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;$K_v$, $м^3$/$ч$&#39;</span><span class="p">:</span> <span class="n">Kvs</span><span class="p">,</span> <span class="s1">&#39;$\zeta_</span><span class="si">{сум}</span><span class="s1">$&#39;</span><span class="p">:</span> <span class="n">rcs</span><span class="p">})</span>
+<span class="n">table</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>$K_v$, $м^3$/$ч$</th>
+      <th>$\zeta_{сум}$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10</td>
+      <td>1474.75223392043</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15</td>
+      <td>655.445437297970</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20</td>
+      <td>368.688058480108</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>25</td>
+      <td>235.960357427269</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30</td>
+      <td>163.861359324492</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>35</td>
+      <td>120.387937462892</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>40</td>
+      <td>92.1720146200270</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>45</td>
+      <td>72.8272708108856</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>50</td>
+      <td>58.9900893568173</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>55</td>
+      <td>48.7521399643118</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>60</td>
+      <td>40.9653398311231</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>65</td>
+      <td>34.9053783176434</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>70</td>
+      <td>30.0969843657231</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>75</td>
+      <td>26.2178174919188</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>80</td>
+      <td>23.0430036550068</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>85</td>
+      <td>20.4117956251963</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>90</td>
+      <td>18.2068177027214</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>95</td>
+      <td>16.3407449741876</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>100</td>
+      <td>14.7475223392043</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Сохранение результатов расчёта в csv-файл:</span>
+<span class="c1">#table.to_csv(&#39;Коэффициент сопротивления от Kv.csv&#39;, sep = &#39;;&#39;)</span>
+<span class="c1">#Сохранение результатов расчёта в html-файл:</span>
+<span class="c1">#table.to_html(&#39;Коэффициент сопротивления от Kv.html&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Нарисуем график</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Kvs</span><span class="p">,</span> <span class="n">rcs</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Зависимость $\zeta_</span><span class="si">{сум}</span><span class="s1">$ от $K_v$ для трубопровода 108х5&#39;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$K_v, м^3/ч$&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\zeta_</span><span class="si">{сум}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>
