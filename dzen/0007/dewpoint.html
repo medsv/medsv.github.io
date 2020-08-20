@@ -13342,7 +13342,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#При передаче в функцию теоретически допустимой пары значений t = 0, RH = 1.0 </span>
 <span class="c1">#SaturationCurve генерирует ошибку выхода за диапазон допустимых значений.</span>
-<span class="c1">#Выход - добавить в функцию проверку: если t == 0., то t += 1e-5</span>
+<span class="c1">#Выход - добавить в функцию проверку: если t == 0., то t = 1e-5</span>
 <span class="n">calc_dew_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
 </pre></div>
 
