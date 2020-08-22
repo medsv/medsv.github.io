@@ -1,6 +1,3 @@
-from scipy import optimize
-from saturationcurve import SaturationCurve
-
 """
 Определение теплофизических свойств влажного воздуха:
 1. Температура мокрого термометра;
@@ -8,6 +5,9 @@ from saturationcurve import SaturationCurve
 3. Влагосодержание;
 4. Энталтпия.
 """
+
+from scipy import optimize
+from saturationcurve import SaturationCurve
 
 __author__ = "Sergey Medvedev"
 __copyright__ = "Sergey Medvedev, 2020"
