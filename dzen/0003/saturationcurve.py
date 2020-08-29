@@ -12,7 +12,7 @@ import numpy as np
 __author__ = "Sergey Medvedev"
 __copyright__ = "Sergey Medvedev, 2020"
 __license__ = "GPL"
-__version__ = "1.0"
+__version__ = "1.1"
 __maintainer__ = "Sergey Medvedev"
 __email__ = "medsv@yandex.ru"
 __status__ = "Production"
@@ -20,6 +20,7 @@ __status__ = "Production"
 class SaturationCurve (object):
     """
     Линия насыщения водяного пара
+    Отличие от версии 1.0: нижнее значение по давлению изменено с 611.213 на 611.212677
     """
     n = np.array([0.11670521452767E4, -0.72421316703206E6, -0.17073846940092E2, 0.12020824702470E5,
         -0.32325550322333E7, 0.14915108613530E2, -0.48232657361591E4, 0.40511340542057E6,
@@ -54,7 +55,7 @@ class SaturationCurve (object):
         @param p: абсолютное давление, Па
         @return: температура, К
         """
-        if not (611.213 <= p <= 22.064e6):
+        if not (611.212677 <= p <= 22.064e6):
             raise ValueError('Значение давления должно находиться в диапазоне [611,213 Па; 22,064 МПа]')
         betta = (p / 1e6) ** 0.25
         E = betta * betta + self.n[2] * betta + self.n[5]
