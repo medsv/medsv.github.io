@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="utf-8" />
-
 <title>Пропускная характеристика регулирующего клапана</title>
-
+<META NAME="DESCRIPTION" CONTENT="Приведён пример построения линейной, параболической и равнопроцентной проходных характеристик регулирующего клапана средствами Python">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
@@ -13089,7 +13088,8 @@ $\bar{K}_V = K_V / K_{VS}$ - относительная пропускная с�
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Для линейной и параболической пропускной характеристики значение $\bar{K}_{V0}$ теоретически может быть равно нулю. Для равнопроцентной пропускной характеристики при $h = 1$ должно выполняться равенство $1 = \bar{K}_{V0}\cdot e^n $, отсюда $\bar{K}_{V0} = 1 / e^n$.</p>
+<p>Для линейной и параболической пропускной характеристики значение $\bar{K}_{V0}$ теоретически может быть равно нулю. Для равнопроцентной пропускной характеристики при $h = 1$ должно выполняться равенство $1 = \bar{K}_{V0}\cdot e^n $, отсюда $\bar{K}_{V0} = 1 / e^n$, а $n = \ln{\left(1 / \bar{K}_{V0}\right)}$.</p>
+<p>Тогда уровнение для равнопроцентной пропускной характеристики примет вид: $\bar{K}_V = \bar{K}_{V0}\cdot \left(1 / \bar{K}_{V0}\right)^h = \bar{K}_{V0}^{(1 - h)}$</p>
 <p>Диапазон регулирования - отношение максимальной пропускной способности к минимальной пропускной способности.</p>
 <p>При диапазоне регулирования 50:1 $\bar{K}_{V0} = 1 / 50 = 0.02$, при диапазоне регулирования 100:1 $\bar{K}_{V0} = 1 / 100 = 0.01$.</p>
 
@@ -13098,7 +13098,7 @@ $\bar{K}_V = K_V / K_{VS}$ - относительная пропускная с�
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">exp</span>
@@ -13111,8 +13111,7 @@ $\bar{K}_V = K_V / K_{VS}$ - относительная пропускная с�
     <span class="k">return</span> <span class="n">Kv0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Kv0</span><span class="p">)</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">h</span>
 <span class="c1">#Равнопроцентная пропускная характеристика</span>
 <span class="k">def</span> <span class="nf">ep_flow_char</span> <span class="p">(</span><span class="n">Kv0</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Kv0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Kv0</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Kv0</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13122,7 +13121,7 @@ $\bar{K}_V = K_V / K_{VS}$ - относительная пропускная с�
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1">#библиотека для работы с массивами</span>
@@ -13135,7 +13134,7 @@ $\bar{K}_V = K_V / K_{VS}$ - относительная пропускная с�
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">51</span> <span class="c1">#Количество точек разбиения диапазона [0; 1] относительного положения штока h</span>
@@ -13156,7 +13155,7 @@ $\bar{K}_V = K_V / K_{VS}$ - относительная пропускная с�
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Формирование данных для графиков</span>
@@ -13172,7 +13171,7 @@ $\bar{K}_V = K_V / K_{VS}$ - относительная пропускная с�
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> <span class="c1">#библотека для построения графиков</span>
