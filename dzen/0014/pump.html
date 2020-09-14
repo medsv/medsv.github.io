@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 
 <title>Моделирование напорной характеристики насоса</title>
-<META NAME="DESCRIPTION" CONTENT="Приведён пример моделирования средствами Python напорной характеристики насоса и определения границ рабочей области насоса с учётом производственных допусков по подаче и напору, а так же с учётом деградации напорной характеристики насоса с течением времени.">
+<META NAME="DESCRIPTION" CONTENT="Приведён пример моделирования средствами Python напорной характеристики насоса и определения границ рабочей области насоса с учётом производственных допусков по подаче и напору, а так же с учётом деградации напорной характеристики насоса с течением времени."/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13356,15 +13356,20 @@ div#notebook {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Верхняя и нижняя границы производственных допусков</span>
 <span class="c1">#Верхняя граница</span>
 <span class="k">def</span> <span class="nf">f_border_u</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
-    <span class="c1">#Q - массив значений подач</span>
-    <span class="c1">#сравнивает допуск по Q и допуск по H и помещает в массив-ответ большее значение</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="n">f_Q_u</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="n">f_H_u</span><span class="p">(</span><span class="n">Q</span><span class="p">))))</span>
-
+    <span class="c1">#Q - массив значений подач или одно значение</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="s2">&quot;__len__&quot;</span><span class="p">):</span> <span class="c1">#если массив</span>
+        <span class="c1">#сравнивает допуск по Q и допуск по H и помещает в ответ-массив большее значение</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="n">f_Q_u</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="n">f_H_u</span><span class="p">(</span><span class="n">Q</span><span class="p">))))</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1">#если одно значение</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">f_Q_u</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="n">f_H_u</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span>
 <span class="c1">#Нижняя граница</span>
 <span class="k">def</span> <span class="nf">f_border_l</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
-    <span class="c1">#Q - массив значений подач</span>
-    <span class="c1">#сравнивает допуск по Q и допуск по H и помещает в массив-ответ меньшее значение</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="n">f_Q_l</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="n">f_H_l</span><span class="p">(</span><span class="n">Q</span><span class="p">))))</span>
+    <span class="c1">#Q - массив значений подач или одно значение</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="s2">&quot;__len__&quot;</span><span class="p">):</span> <span class="c1">#если массив</span>
+        <span class="c1">#сравнивает допуск по Q и допуск по H и помещает в ответ-массив меньшее значение</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="n">f_Q_l</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="n">f_H_l</span><span class="p">(</span><span class="n">Q</span><span class="p">))))</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1">#если одно значение</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">f_Q_l</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="n">f_H_l</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span>
 </pre></div>
 
     </div>
