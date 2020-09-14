@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Использование Python и Jupyter Notebook для инженерных расчётов</title>
 <META NAME="DESCRIPTION" CONTENT="Приведены примеры решения инженерных задач с использованием Python и Jupyter Notebook."/>
-<META NAME="Keywords" CONTENT="Python, Jupyter Notebook, инженерные задачи, инженерные расчёты, программы">
+<META NAME="Keywords" CONTENT="Python, Jupyter Notebook, инженерные задачи, инженерные расчёты, программы"/>
 </head>
 <body>
 
