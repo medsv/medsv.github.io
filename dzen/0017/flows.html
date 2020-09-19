@@ -2,11 +2,12 @@
 <html lang="ru">
 <head><meta charset="utf-8" />
 
-<title>Гидравлическая балансировка сети</title>
-<META NAME="DESCRIPTION" CONTENT="Приведён пример решения средствами Python задачи гидравлической балансировки  сети."/>
+<title>Определение значений расходов в участках гидравлической сети</title>
+<META NAME="DESCRIPTION" CONTENT="Приведён пример решения средствами Python задачи определения значений расходов в участках гидравлической сети для заданных значений гидравлических сопротивлений участков сети и напора насоса."/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
 
 <style type="text/css">
     /*!
@@ -13076,14 +13077,20 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="&#1043;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1072;&#1103;-&#1073;&#1072;&#1083;&#1072;&#1085;&#1089;&#1080;&#1088;&#1086;&#1074;&#1082;&#1072;-&#1089;&#1077;&#1090;&#1080;">&#1043;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1072;&#1103; &#1073;&#1072;&#1083;&#1072;&#1085;&#1089;&#1080;&#1088;&#1086;&#1074;&#1082;&#1072; &#1089;&#1077;&#1090;&#1080;<a class="anchor-link" href="#&#1043;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1072;&#1103;-&#1073;&#1072;&#1083;&#1072;&#1085;&#1089;&#1080;&#1088;&#1086;&#1074;&#1082;&#1072;-&#1089;&#1077;&#1090;&#1080;">&#182;</a></h1><h2 id="&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;-&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;">&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080;<a class="anchor-link" href="#&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;-&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;">&#182;</a></h2><p>Рассмотрим гидравлическую сеть, состоящую из насоса, подающего трубопровода, нескольких параллельно подключённых потребителей и обратного трубопровода:</p>
-<p><img src="Схема.png" alt="title"></p>
-<p>$H$, м - напор насоса, $\Delta H_{i,j}$, м - падение давления на участке $(i,j)$ сети, $R_{i,j}$ - гидравлическое сопротивление участка $(i,j)$ сети (подробнее про гидравлическое сопротивление см. в статье <a href="https://medsv.github.io/dzen/0015/network.html">Моделирование характеристики гидравлической сети</a>), $Q_{i,j}$, $м^3/ч$ - объёмный расход через участок $(i,j)$ сети, причём $Q_{0,j} = Q_{2,j}$.</p>
-<p>Индекс $i=0$ соответствует участкам подающего трубопровода, $i=1$ - потребители, $i=2$ - участки обратного трубопровода. Индекс $j$ - номер потребителя (от 0 до $N-1$).
-Все значения $R_{i,j}$ известны, так же известны значения расхода через каждый потребитель $Q_{1,j}$, $j = 0\ldots N-1$.</p>
-<p>В качестве примера рассмотрим сеть из трёх потребителей.
-На первом этапе найдём значение напора насоса, величина которого будет достаточной для обеспечения через каждый потребитель расхода не менее требуемого.</p>
-
+<h1 id="&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1077;-&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1081;-&#1088;&#1072;&#1089;&#1093;&#1086;&#1076;&#1086;&#1074;-&#1074;-&#1091;&#1095;&#1072;&#1089;&#1090;&#1082;&#1072;&#1093;-&#1075;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1081;-&#1089;&#1077;&#1090;&#1080;">&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1081; &#1088;&#1072;&#1089;&#1093;&#1086;&#1076;&#1086;&#1074; &#1074; &#1091;&#1095;&#1072;&#1089;&#1090;&#1082;&#1072;&#1093; &#1075;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1081; &#1089;&#1077;&#1090;&#1080;<a class="anchor-link" href="#&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1077;-&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1081;-&#1088;&#1072;&#1089;&#1093;&#1086;&#1076;&#1086;&#1074;-&#1074;-&#1091;&#1095;&#1072;&#1089;&#1090;&#1082;&#1072;&#1093;-&#1075;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1081;-&#1089;&#1077;&#1090;&#1080;">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Рассмотрим гидравлическую сеть:<br>
+<img src="0017_Схема.png" alt="title"></p>
+<p>$H$, м - напор насоса, $R$ - гидравлическое сопротивление участка сети (подробнее про гидравлическое сопротивление см. в статье <a href="https://medsv.github.io/dzen/0015/network.html">Моделирование характеристики гидравлической сети</a>), $Q$, $м^3/ч$ - объёмный расход через участок сети.</p>
+<p>Необходимо найти значения расхода в каждом участки сети при известных значениях гидравлических сопротивлений и напора насоса.</p>
+<p>Для этого следует составить и решить систему нелинейных уравнений.</p>
+<p>Рассмотрим сеть, состоящую из трёх потребителей. В этом случае нужно найти пять значений расходов: $Q_i,\ i = 0 \ldots 4$, для чего необходимо составить и совместно решить пять уравнений.</p>
+$$H - (R_0 + R_2)Q_0^2 - R_1Q_1^2 = 0$$$$R_1Q_1^2 - (R_3 + R_5)Q_2^2 - R_4Q_3^2 = 0$$$$R_4Q_3^2 - (R_6 + R_7 + R_8)Q_4^2 = 0$$$$Q_0 - Q_1 - Q_2 = 0$$$$Q_2 - Q_3 - Q_4 = 0$$
 </div>
 </div>
 </div>
@@ -13093,6 +13100,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1">#работа с массивами</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># количество потребителей</span>
 </pre></div>
 
     </div>
@@ -13100,15 +13108,25 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Значения гидравлических сопротивлений $R$ участков сети и значение напора насоса $H$ возьмём <a href="https://medsv.github.io/dzen/0016/hydrbal.html">отсюда</a>.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># количество потребителей</span>
-<span class="n">Qs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span> <span class="c1">#массив расходов</span>
-<span class="c1">#Зададим значения расходов через каждый из трёх потребителей</span>
-<span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Зададим значения гидравлических сопротивлений всех участков сети</span>
+<span class="n">Rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0002</span><span class="p">,</span> <span class="mf">0.0002</span><span class="p">,</span> <span class="mf">0.0002</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.0004</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">]],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span>
+<span class="c1">#Напор насоса, м</span>
+<span class="n">H</span> <span class="o">=</span> <span class="mf">41.31</span>
 </pre></div>
 
     </div>
@@ -13121,13 +13139,35 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Зададим значения гидравлических сопротивлений всех участков сети</span>
-<span class="n">Rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0002</span><span class="p">,</span> <span class="mf">0.0002</span><span class="p">,</span> <span class="mf">0.0002</span><span class="p">],</span>
-              <span class="p">[</span><span class="mf">0.0004</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">],</span>
-              <span class="p">[</span><span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">]],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Т.к. в функцию поиска корней системы нелинейных уравнений в качестве</span>
+<span class="c1">#входного параметра передаётся одномерный массив значений первых приближений расходов,</span>
+<span class="c1">#то все массивы придётся делать одномерными</span>
+<span class="n">Rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Rs</span><span class="p">,</span> <span class="n">N</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span>
+<span class="n">Rs</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.0002, 0.0004, 0.0005, 0.0002, 0.0004, 0.0005, 0.0002, 0.0004,
+       0.0005])</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13137,79 +13177,73 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Найдём значения расходов через остальные участкки сети</span>
-<span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">tmp</span> <span class="o">+=</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-    <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
-<span class="n">Qs</span>    
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Функция, возвращающая результат вычисления входящих в систему уравнений выражений</span>
+<span class="c1">#для переданных значений расходов Qs. Если Qs - решение системы уравнений, то</span>
+<span class="c1">#функция возвращает массив из (2*N-1) нулей.</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">Qs</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#Выражение для нулевого контура - падение давления на участке R0-R1-R2 должно равняться H</span>
+    <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span> <span class="o">-</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="c1">#Выражения для контуров 1 - (N-2)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="c1">#Выражения для контуров N-1    </span>
+    <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">f</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="c1">#Баланс расходов в узлах 0 - (N-2)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Qs</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">f</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[4]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[170., 120., 100.],
-       [ 50.,  20., 100.],
-       [170., 120., 100.]])</pre>
 </div>
-
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>В функцию нахождения решения системы нелинейных уравнений необходимо передавать в качестве параметра массив первых приближений значений расходов. Если значения первых приближений выбраны неудачно, то функция может не найти решение (выдать ошибку) или уйти в область отрицательных значений.</p>
+<p>Для формирования массива первых приближений проделаем следующее. Расчитаем расход через каждый потребитель при условии отключения от подводящего и отводящего трубопроводов других потребителей кроме рассматрваемого. Затем найдём значения расходов через участки подводящего трубопровода при условии, что через каждый потребитель проходит найденный на первом этапе расход.</p>
 
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dHs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span>
-<span class="c1">#dHs[0,j] - потери давления в подводящем и отводящем трубопроводах потребителя j</span>
-<span class="c1">#dHs[1,j] - потери давления в контуре потребителя j (dHs[0,j] + потери давления в линии потребителя)</span>
-<span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">tmp</span> <span class="o">+=</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="n">dHs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
-    <span class="n">dHs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dHs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="n">dHs</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="c1">#Функция для определения начальных значений, передаваемых </span>
+<span class="c1">#в функцию решения системы нелинейных уравнений в качестве первого приближения</span>
+<span class="k">def</span> <span class="nf">get_init_guess</span><span class="p">():</span>
+    <span class="n">Qs_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#опрределяем расход через каждый потребитель</span>
+    <span class="n">R_pipe</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="n">R_pipe</span> <span class="o">+=</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="c1">#сопротивление подводящих и отводящих трубопроводов</span>
+        <span class="n">R_circ</span>  <span class="o">=</span> <span class="n">R_pipe</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#суммарное сопротивление контура</span>
+        <span class="n">Qs_i</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">H</span><span class="o">/</span><span class="n">R_circ</span><span class="p">)</span> <span class="c1">#расход через контур</span>
+    <span class="c1">#Для последнего контура</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">Qs_i</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">H</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_pipe</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="c1">#Отределяем расход через участки подводящего трубопровода</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">Qs_i</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">Qs_i</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="n">Qs_i</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">Qs_i</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">Qs_i</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[20.23, 30.31, 37.31],
-       [21.23, 30.47, 41.31]])</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -13219,9 +13253,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Напор насоса равен максимальному значению в массиве потерь давления в контурах потребителей</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">dHs</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="n">H</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_init_guess</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13240,7 +13272,8 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>41.31</pre>
+<pre>array([473.82823768, 193.78995189, 280.03828579, 151.49257408,
+       128.54571171])</pre>
 </div>
 
 </div>
@@ -13252,7 +13285,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Если мы установим насос с выбранными парарметрами, то расходы в линиях потребителей будут отличаться от требуемых значений (см. <a href="https://medsv.github.io/dzen/0017/flows.html">[1]</a>). Для балансировки системы необходимо увеличить сопротивления в линиях потребителей таким образом, чтобы падение давления на потребителе при требуемом расходе равнялось $\Delta H_{1,j} = H - \Delta H^{тр}_j$, где $H^{тр}_j$ - потери давления в подводящем и отводящем трубопроводе потребителя $j$.</p>
+<p>Для решения систем нелинейных уравнений применим функцию <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html"><b>root</b></a> из библиотеки <b>scipy.optimize</b>.</p>
 
 </div>
 </div>
@@ -13262,9 +13295,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Сопротивления при которых через потребители будет проходить требуемый расход</span>
-<span class="n">Rs_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span> <span class="o">-</span> <span class="n">dHs</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span> <span class="o">/</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="n">Rs_b</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root</span>
+<span class="c1">#Вызываем функцию root, передав ей функцию с уравнениями и массив начальных приближений </span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">get_init_guess</span><span class="p">())</span>
+<span class="c1">#Значения найденных расходов находится в sol.x</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 
     </div>
@@ -13283,7 +13318,8 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.008432, 0.0275  , 0.0004  ])</pre>
+<pre>array([221.61767816, 131.62373749,  89.99394067,  56.14015402,
+        33.85378665])</pre>
 </div>
 
 </div>
@@ -13297,9 +13333,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Найдём значения дополнительных (балансировочных) спротивлений для каждой ветви</span>
-<span class="n">dRs</span> <span class="o">=</span> <span class="n">Rs_b</span> <span class="o">-</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span>
-<span class="n">dRs</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Количество выполненных приближений</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">nfev</span>
 </pre></div>
 
     </div>
@@ -13318,7 +13353,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.008032, 0.0271  , 0.      ])</pre>
+<pre>21</pre>
 </div>
 
 </div>
@@ -13330,7 +13365,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1072;">&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1072;<a class="anchor-link" href="#&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1072;">&#182;</a></h3><p>Ответом всех трёх выражений должно быть значение напора насоса</p>
+<p>Проверим правильность найденных в <a href="https://medsv.github.io/dzen/0016/hydrbal.html">[1]</a> сбалансированных значений гидравлических сопротивлений линий потребителей.</p>
 
 </div>
 </div>
@@ -13340,7 +13375,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">Rs_b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Rs_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.008432</span><span class="p">,</span> <span class="mf">0.0275</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Rs_b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rs_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">get_init_guess</span><span class="p">())</span>
+<span class="n">r</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 
     </div>
@@ -13359,7 +13398,8 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>41.31</pre>
+<pre>array([170.        ,  50.00000001, 120.        ,  20.        ,
+        99.99999999])</pre>
 </div>
 
 </div>
@@ -13367,13 +13407,25 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Найденные значения расходов совпадают с большой степенью точности с заданными для каждого потребителя значениями расходов, значит в [1] были найдены корректные значения сбалансиованных сопротивлений линий потребителей.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">Rs_b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1">#Попробуем сделать расчёт для сети с 50 потребителями</span>
+<span class="n">Rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-4</span> <span class="c1">#Добавляем 1e-4 чтобы гарантированно не было нулевых сопротивлений</span>
+<span class="n">H</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1">#Задаём напор насоса</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">get_init_guess</span><span class="p">())</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 
     </div>
@@ -13392,7 +13444,31 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>41.31</pre>
+<pre>array([2.85935083e+01, 1.62095851e+01, 1.23839232e+01, 8.23417608e+00,
+       4.14974711e+00, 2.33190642e+00, 1.81784069e+00, 1.20293802e+00,
+       6.14902668e-01, 3.73733993e-01, 2.41168675e-01, 2.08645815e-01,
+       3.25228602e-02, 1.73955191e-02, 1.51273411e-02, 1.05805562e-02,
+       4.54678486e-03, 2.87054677e-03, 1.67623808e-03, 9.56473355e-04,
+       7.19764727e-04, 3.97977279e-04, 3.21787448e-04, 2.07539122e-04,
+       1.14248326e-04, 6.33218807e-05, 5.09264449e-05, 3.52486679e-05,
+       1.56777770e-05, 6.76603533e-06, 8.91174171e-06, 5.47652978e-06,
+       3.43521194e-06, 2.65674506e-06, 7.78466879e-07, 4.73029870e-07,
+       3.05437008e-07, 1.93283170e-07, 1.12153838e-07, 4.46223718e-08,
+       6.75314685e-08, 4.30907832e-09, 6.32223902e-08, 2.61015569e-09,
+       6.06122345e-08, 2.55619925e-09, 5.80560353e-08, 2.49488916e-09,
+       5.55611461e-08, 2.46340878e-09, 5.30977374e-08, 2.45348426e-09,
+       5.06442531e-08, 2.40096022e-09, 4.82432929e-08, 2.36339033e-09,
+       4.58799025e-08, 2.31251650e-09, 4.35673860e-08, 2.31836121e-09,
+       4.12490248e-08, 2.25849414e-09, 3.89905307e-08, 2.26209355e-09,
+       3.67284371e-08, 2.24794373e-09, 3.44804934e-08, 2.23864545e-09,
+       3.22418480e-08, 2.23160917e-09, 3.00102388e-08, 2.17868429e-09,
+       2.78315545e-08, 2.15363177e-09, 2.56779227e-08, 2.11939853e-09,
+       2.35585242e-08, 2.08900149e-09, 2.14695227e-08, 2.07825797e-09,
+       1.93912647e-08, 2.06644002e-09, 1.73248247e-08, 2.01978713e-09,
+       1.53050376e-08, 1.99198793e-09, 1.33130497e-08, 1.97650517e-09,
+       1.13365445e-08, 1.95105644e-09, 9.38548805e-09, 1.93388972e-09,
+       7.45159834e-09, 1.89252276e-09, 5.55907558e-09, 1.88291733e-09,
+       3.67615824e-09, 1.84670668e-09, 1.82945156e-09])</pre>
 </div>
 
 </div>
@@ -13406,8 +13482,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> \
-<span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">Rs_b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Количество выполненных приближений</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">nfev</span>
 </pre></div>
 
     </div>
@@ -13426,7 +13502,151 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>41.31</pre>
+<pre>667</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Проверка: выражения должны возвращать значение напора насоса</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Ближайший потребитель i = 0</span>
+<span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1000.0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Самый дальний потребитель i = N-1</span>
+<span class="n">dH</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">dH</span> <span class="o">+=</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">dH</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1000.0000000000001</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Если в качестве значений первых пиближений для расходов принять единицы, то в ответе появятся отрицательные значения, что противоречит физическому смыслу.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">root</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 2.85935083e+01,  1.62095851e+01,  1.23839232e+01,  8.23417608e+00,
+        4.14974711e+00,  2.33190642e+00,  1.81784069e+00,  1.20293802e+00,
+        6.14902668e-01,  3.73733993e-01,  2.41168675e-01,  2.08645815e-01,
+        3.25228602e-02,  1.73955191e-02,  1.51273411e-02,  1.05805562e-02,
+        4.54678486e-03,  2.87054677e-03,  1.67623808e-03,  9.56473355e-04,
+        7.19764727e-04,  3.97977279e-04,  3.21787448e-04,  2.07539122e-04,
+        1.14248326e-04,  6.33218798e-05,  5.09264457e-05,  3.52486472e-05,
+        1.56777986e-05,  6.76580305e-06,  8.91199551e-06,  5.47631888e-06,
+        3.43567663e-06,  2.67503842e-06,  7.60638210e-07,  4.93993331e-07,
+        2.66644879e-07,  1.79368897e-07,  8.72759821e-08,  2.51936727e-08,
+        6.20823094e-08, -2.47638889e-08,  8.68461982e-08,  6.59687705e-09,
+        8.02493212e-08, -1.43562906e-08,  9.46056118e-08,  1.76876679e-08,
+        7.69179440e-08,  3.16166179e-08,  4.53013260e-08, -4.91501212e-08,
+        9.44514472e-08, -1.47477178e-08,  1.09199165e-07,  3.36335629e-08,
+        7.55656021e-08,  3.71316125e-08,  3.84339896e-08, -6.14181585e-08,
+        9.98521481e-08,  2.55886018e-08,  7.42635463e-08, -5.88096016e-09,
+        8.01445064e-08,  8.20486620e-09,  7.19396402e-08,  2.91600013e-08,
+        4.27796390e-08, -5.07332293e-08,  9.35128683e-08,  1.61904725e-08,
+        7.73223958e-08, -4.08988975e-09,  8.14122855e-08, -2.82231080e-08,
+        1.09635394e-07,  3.70124387e-08,  7.26229549e-08,  6.65257516e-09,
+        6.59703797e-08, -2.26383129e-08,  8.86086926e-08,  5.06723673e-09,
+        8.35414559e-08,  1.38784840e-08,  6.96629719e-08, -7.48376531e-09,
+        7.71467372e-08,  6.00621430e-09,  7.11405229e-08, -2.32912765e-08,
+        9.44317993e-08,  3.45968838e-08,  5.98349155e-08, -4.32266336e-08,
+        1.03061549e-07,  3.99397579e-08,  6.31217912e-08])</pre>
 </div>
 
 </div>
@@ -13439,7 +13659,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;">&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;<a class="anchor-link" href="#&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;">&#182;</a></h3><ol>
-<li><a href="https://medsv.github.io/dzen/0017/flows.html">Определение значений расходов в участках гидравлической сети</a></li>
+<li><a href="https://medsv.github.io/dzen/0016/hydrbal.html">Гидравлическая балансировка сети</a></li>
 </ol>
 
 </div>
