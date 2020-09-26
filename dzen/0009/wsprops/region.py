@@ -2,27 +2,50 @@
 В модуле размещён родительский класс Region однофазных областей 1, 2
 """
 
-from paramsin import ParamsIn
-from calcprops import CalcProps
-from calcprops1 import CalcProps1
-
 __author__ = "Sergey Medvedev"
 __copyright__ = "Sergey Medvedev, 2020"
 __license__ = "GPL"
-__version__ = "1.0"
+__version__ = "1.1"
 __maintainer__ = "Sergey Medvedev"
 __email__ = "medsv@yandex.ru"
 __status__ = "Production"
 
+from paramsin import ParamsIn
 
-class Region(ParamsIn, CalcProps, CalcProps1):
+
+class Region(ParamsIn):
     """Родительский класс для классов однофазных областей 1, 2.
     Содержит общие для области 1 и 2 методы"""
 
+    R = 461.526  # Газовая постоянная водяного пара, Дж/кг/К
+    Tc = 647.096  # Температура в критической точке, К
+    pc = 22.064e6  # Давление в критической точке, Па
+    rc = 322  # Плотность в критической точке, кг/м3
+
     def __init__(self):
         ParamsIn.__init__(self)
-        CalcProps.__init__(self)
-        CalcProps1.__init__(self)
+
+
+    def props_Tp(self, T, p):
+        """
+        Расчёт теплофизических свойств воды и водяного пара по температуре и давлению.
+        :param T: температура, К
+        :param p: давление, Па
+        :return: словарь свойств.
+        """
+        self._props_Tp(T, p)
+        self.props['T'] = T
+        self.props['p'] = p
+        return self.props.copy()
+
+    def props_tp(self, t, p):
+        """
+        Расчёт теплофизических свойств воды и водяного пара по температуре и давлению.
+        :param t: температура, С
+        :param p: давление, Па
+        :return: словарь свойств.
+        """
+        return self.props_Tp(t + 273.15, p)
 
     def props_ph(self, p, h):
         """
@@ -58,10 +81,39 @@ class Region(ParamsIn, CalcProps, CalcProps1):
         :param X: 'h' или 's'
         :return: True если точка находится внутри области, False в противном случае
         """
-        if not self._check_p(p):
+        if not self.p_in(p):
             return False
         T_lower, T_upper = self._get_T_edges(p)
         value_lower = self.props_Tp(T_lower, p)[X]
         value_upper = self.props_Tp(T_upper, p)[X]
         return value_lower <= value <= value_upper
 
+    def _props_Tp(self, T, p):
+        """
+        Абстрактный метод.
+        Расчёт теплофизических свойств воды и водяного пара по температуре и давлению.
+        :param T: температура, К
+        :param p: давление, Па
+        :return: None
+        """
+        raise NotImplementedError("Метод должен быть переопределён")
+
+    def T_ph(self, p, h):
+        """
+        Абстрактный метод.
+        Определение температуры по давлению и энтальпии
+        :param p: давление, Па
+        :param h: энтальпия, Дж/кг
+        :return: температура, К
+        """
+        raise NotImplementedError('Метод должен быть переопределён')
+
+    def T_ps(self, p, s):
+        """
+        Абстрактный метод.
+        Определение температуры по давлению и энтропии
+        :param p: давление, Па
+        :param s: энтропии, Дж/кг/К
+        :return: температура, К
+        """
+        raise NotImplementedError('Метод должен быть переопределён')

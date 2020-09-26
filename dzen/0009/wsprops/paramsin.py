@@ -1,16 +1,16 @@
 """
 В модуле размещён класс ParamsIn, содержащий методы, предназначенные для определения границ области
 """
-
-from saturationcurve import SaturationCurve
-
 __author__ = "Sergey Medvedev"
 __copyright__ = "Sergey Medvedev, 2020"
 __license__ = "GPL"
-__version__ = "1.0"
+__version__ = "1.1"
 __maintainer__ = "Sergey Medvedev"
 __email__ = "medsv@yandex.ru"
 __status__ = "Production"
+
+from saturationcurve import SaturationCurve
+
 
 class ParamsIn:
     """
@@ -20,19 +20,43 @@ class ParamsIn:
 
     def __init__(self):
         """
-        Конструктор класса.
-        Инициализация граничных значений температур и давлений.
-        """
+         Инициализация словаря теплофизических свойств:
+         давление, Па
+         температура, К
+         удельный объём, м3/кг
+         удельная внутренняя энергия, Дж/кг
+         удельная эниропия, Дж/кг/К
+         удельная энтальпия, Дж/кг
+         удельная изохорная теплоёмкость,
+         удельная изобарная теплоёмкость
+         скорость звука, м/с
+         степень сухости влажного воздуха (-1 для воды, 2 для перегретого пара)
+         """
+        self.props = {
+            'T': None,
+            'p': None,
+            'h': None,
+            's': None,
+            'cp': None,
+            'cv': None,
+            'v': None,
+            'u': None,
+            'w': None,
+            'x': None
+        }
+        """Инициализация граничных значений температур и давлений"""
         """Минимальное значение температуры, K"""
         self.T_min = 273.15
         """Максимальное значение температуры, K"""
-        self.T_max = None
+        self.T_max = 1073.15
         """Минимальное значение давления, Па"""
         self.p_min = self.sc.p_T(self.T_min)
         """Максимальное значение давления, Па"""
         self.p_max = 100e6
+        """Верхнее значение давления при котором кривая насыщения ещё является границей между областями 1 и 2"""
+        self.p_s_marg = self.sc.p_T(623.15)
 
-    def _check_p(self, p):
+    def p_in(self, p):
         """
         Проверка нахождения значения давления внутри допустимого диапазона
         :param p: давление, Па
@@ -40,7 +64,7 @@ class ParamsIn:
         """
         return self.p_min <= p <= self.p_max
 
-    def _check_T(self, T):
+    def T_in(self, T):
         """
         Проверка нахождения значения температуры внутри допустимого диапазона
         :param T: температура, К
@@ -48,15 +72,23 @@ class ParamsIn:
         """
         return self.T_min <= T <= self.T_max
 
-    def _check_t(self, t):
+    def t_in(self, t):
         """
         Проверка нахождения значения температуры внутри допустимого диапазона
         :param t: температура, C
         :return: True если температура находится внутри допустимого диапазона, False в противном сучае
         """
-        return self._check_T(t + 273.15)
+        return self.T_in(t + 273.15)
 
-    def _get_T_edges(p):
+    def x_in(self, x):
+        """
+        Проверка нахождения точки в области влажного пара
+        :param x: степень сухости
+        :return: True если значение x лежит в диапазоне [0; 1], False в противном сучае
+        """
+        return 0. <= x <= 1.
+
+    def _get_T_edges(self, p):
         """
         Абстрактный метод.
         Определение граничных значений температуры в области при давлении p
@@ -65,7 +97,7 @@ class ParamsIn:
         """
         raise NotImplementedError('Метод должен быть переопределён')
 
-    def _get_h_edges(p):
+    def _get_h_edges(self, p):
         """
         Абстрактный метод.
         Определение граничных значений энтальпий в области при давлении p
@@ -74,7 +106,7 @@ class ParamsIn:
         """
         raise NotImplementedError('Метод должен быть переопределён')
 
-    def _get_s_edges(p):
+    def _get_s_edges(self, p):
         """
         Абстрактный метод.
         Определение граничных значений энтропии в области при давлении p
@@ -90,7 +122,7 @@ class ParamsIn:
         :param p: давление, Па
         :return: True если точка находится внутри области, False в противном сучае
         """
-        if not (self._check_p(p) and self._check_T(T)):
+        if not (self.p_in(p) and self.T_in(T)):
             return False
         T_lower, T_upper = self._get_T_edges(p)
         return T_lower <= T <= T_upper
