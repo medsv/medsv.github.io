@@ -12,7 +12,7 @@ import numpy as np
 __author__ = "Sergey Medvedev"
 __copyright__ = "Sergey Medvedev, 2020"
 __license__ = "GPL"
-__version__ = "1.1"
+__version__ = "1.2"
 __maintainer__ = "Sergey Medvedev"
 __email__ = "medsv@yandex.ru"
 __status__ = "Production"
@@ -25,6 +25,17 @@ class SaturationCurve (object):
     n = np.array([0.11670521452767E4, -0.72421316703206E6, -0.17073846940092E2, 0.12020824702470E5,
         -0.32325550322333E7, 0.14915108613530E2, -0.48232657361591E4, 0.40511340542057E6,
         -0.23855557567849, 0.65017534844798E3], dtype=float)
+
+    def __init__(self):
+        """Минимальное значение температуры, K"""
+        self.T_min = 273.15
+        """Максимальное значение температуры, K"""
+        self.T_max = 647.096
+        """Минимальное значение давления, Па"""
+        self.p_min = 611.212677
+        """Максимальное значение давления, Па"""
+        self.p_max = 22.064e6
+
 
     def p_T(self, T):
         """
