@@ -1,6 +1,10 @@
 """
 В модуле размещёны функции для расчёта коэффициентов гидравлического сопротивления следующих элементов трубопровода:
 1. Прямые круглые трубы (гладкие и с неравномерной шероховатостью)
+-------------------------------------------------
+'Инженерные расчёты на Python'
+https://zen.yandex.ru/id/5f33dcd5554adc5b33aaee83
+https://medsv.github.io/
 """
 
 __author__ = "Сергей Медведев"
@@ -80,7 +84,7 @@ def calc_lambda(w, D, Delta=0, kvisc=1e-06, quadr=False):
     Re = calc_Re(w, D, kvisc)
     Re_marg = fRe_lowmarg_pipe(delta)
     if Re < Re_marg:
-        raise ValueError(f"Значение Re = {Re} меньше значения нижнего допустимого значения {Re_marg}")
+        raise ValueError(f"Значение Re = {Re} меньше нижнего допустимого значения {Re_marg}")
     if delta == 0:  # гладкая труба
         lamb = (1.8 * log10(Re) - 1.64) ** -2
     elif not quadr or Re < 560 / delta:  # стабилизированное течение стр. 90 в [1]
