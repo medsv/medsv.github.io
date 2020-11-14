@@ -3,8 +3,8 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Определение суммарного коэффициента сопротивления по значению пропускной способности Kv</title>
-<META NAME="DESCRIPTION" CONTENT="Вывод формулы определения суммарного коэффициента сопротивления по значению пропускной способности Kv"/>
+<title>Гидравлический расчёт трубопровода</title>
+<META NAME="DESCRIPTION" CONTENT="Расчёт потерь давления (напора) в трубопроводе"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
@@ -14261,27 +14261,15 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1077;-&#1089;&#1091;&#1084;&#1084;&#1072;&#1088;&#1085;&#1086;&#1075;&#1086;-&#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072;-&#1089;&#1086;&#1087;&#1088;&#1086;&#1090;&#1080;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103;-&#1087;&#1086;-&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1102;-&#1087;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;&#1085;&#1086;&#1081;-&#1089;&#1087;&#1086;&#1089;&#1086;&#1073;&#1085;&#1086;&#1089;&#1090;&#1080;-$K_V$">&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1077; &#1089;&#1091;&#1084;&#1084;&#1072;&#1088;&#1085;&#1086;&#1075;&#1086; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072; &#1089;&#1086;&#1087;&#1088;&#1086;&#1090;&#1080;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1087;&#1086; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1102; &#1087;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;&#1085;&#1086;&#1081; &#1089;&#1087;&#1086;&#1089;&#1086;&#1073;&#1085;&#1086;&#1089;&#1090;&#1080; $K_V$<a class="anchor-link" href="#&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1077;-&#1089;&#1091;&#1084;&#1084;&#1072;&#1088;&#1085;&#1086;&#1075;&#1086;-&#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072;-&#1089;&#1086;&#1087;&#1088;&#1086;&#1090;&#1080;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103;-&#1087;&#1086;-&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1102;-&#1087;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;&#1085;&#1086;&#1081;-&#1089;&#1087;&#1086;&#1089;&#1086;&#1073;&#1085;&#1086;&#1089;&#1090;&#1080;-$K_V$">&#182;</a></h1>
+<h1 id="&#1043;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1072;">&#1043;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;&#1081; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090; &#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1072;<a class="anchor-link" href="#&#1043;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1072;">&#182;</a></h1>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>При проведении гидравлических расчётов для вычисления потерь полного давления в каком либо элементе трубопровода необходимо иметь значение его суммарного коэффициента сопротивления, который равен сумме значений коэффициента сопротивления трения и коэффициента местного сопротивления.</p>
-<p>В справочных данных по запорной арматуре в качестве параметра,  характеризующего гидравлическое сопротивление, приводится значение пропускной способности $K_V$.</p>
+<p>В <a href="#ref1">[1]</a> и <a href="#ref2">[2]</a> были описаны методики расчёта потерь давления в трубе и в отводе. Там же были приведены примеры использования функций из модуля <code>hydrcalc</code> для расчёта потерь давления в этих элементах трубопровода.
+В версию 3 модуля <code>hydrcalc</code> (<a href="https://medsv.github.io/dzen/0026/hydrcalc.py">скачать</a>) были добавлены функции для расчёта потерь давления по значению пропускной способности $K_V$ <code>Kv_calc_dH(Q, D, Kv)</code> и по значению коэффициента местного сопротивления $\zeta$ <code>lrc_calc_dH(Q, D, lrc)</code>.</p>
+<p>Для расчёта потерь давления в трубопроводе предназначена функция <code>ppln_calc_dH(Q, elems, **kwargs)</code>, которая возвращает список значений потерь давления (в метрах столба жидкости) для каждого элемента трубопровода.</p>
 
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Пропускная способность элемента трубопровода $K_V$ - значение, равное расходу жидкости, $м^3/ч$, плотностью 1000 $кг/м^3$, протекающей через элемент трубопровода при перепаде давления на нём 0,1 МПа.</p>
-<p>Потери давления через суммарный коэффициент сопротивления находятся по формуле:</p>
-$$\Delta p = \zeta_{сум} \frac{\rho w^2}{2}$$<p>отсюда
-$$\zeta_{сум} = \frac{2 \Delta p}{\rho w^2} \ \ \ \ \ \ (1)$$</p>
-<p>где $\zeta_{сум}$ - искомый суммарный коэффициент сопротивления, $\Delta p = 10^5$ Па (см. определение пропускной способности выше) - потери давления, $\rho=1000$ $кг/м^3$ - плотность среды, $w$ - скорость движения среды плотностью 1000 $кг/м^3$ внутри трубопровода на котором установлен рассматриваемый элемент, $м/с$, при объёмном расходе $K_V$.</p>
-$$w = Q / F,$$<p>где $Q$ - объёмный расход среды, $м^3/c$, $F$ - площадь внутреннего сечения трубопровода на котором установлен рассматриваемый элемент, $м^2$.<br>
-$K_V$ - это объёмный расход в $м^3/ч$, тогда $Q = K_V/3600$.
-Подставив выведенные выше выражения в формулу (1), получим:</p>
-$$\zeta_{сум} = \frac{2 \cdot 10^5}{1000}\left(\frac{3600 \cdot F}{K_V}\right)^2$$
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14289,7 +14277,9 @@ $$\zeta_{сум} = \frac{2 \cdot 10^5}{1000}\left(\frac{3600 \cdot F}{K_V}\right
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mf">2e5</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">3600</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">1e6</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">hydrcalc</span> <span class="kn">import</span> <span class="n">ppln_calc_dH</span>
+<span class="c1">#Описание функции ppln_calc_dH</span>
+<span class="n">help</span><span class="p">(</span><span class="n">ppln_calc_dH</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14305,15 +14295,21 @@ $$\zeta_{сум} = \frac{2 \cdot 10^5}{1000}\left(\frac{3600 \cdot F}{K_V}\right
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Help on function ppln_calc_dH in module hydrcalc:
 
+ppln_calc_dH(Q, elems, **kwargs)
+    Расчёт потерь давления (метры столба жидкости) в трубопроводе
+    Возвращает список значений потерь давления (метры столба жидкости) для каждого элемента трубопровода
+    Q: объёмный расход, м3/ч
+    elems: список элементов трубопровода. Каждый элемент списка - словарь параметров
+    kwargs: словарь параметров со значениями по умолчанию
 
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>2592.0</pre>
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -14323,55 +14319,63 @@ $$\zeta_{сум} = \frac{2 \cdot 10^5}{1000}\left(\frac{3600 \cdot F}{K_V}\right
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>В итоге искомое выражение принимает вид:</p>
-$$\zeta_{сум} = 2592\cdot 10^6 \left(\frac{ F}{K_V}\right)^2$$<p>где $$F = \frac{\pi(D-2h)^2}{4}\cdot 10^{-6},$$</p>
-<p>где $D$ - внешний диаметр трубопровода, мм; $h$ - толщина стенки трубопровода, мм. Например, для трубопровода 108х5: внешний диаметр 108 мм, толщина стенки 5 мм.</p>
+<p>В функцию <code>ppln_calc_dH</code> в качестве одного из параметров необходимо передать список элементов рассматриваемого трубопровода. Каждый элемент трубопровода представлен словарём. В каждом словаре должен быть задан ключ 'type'.</p>
 
 </div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="&#1042;&#1099;&#1074;&#1086;&#1076;-&#1092;&#1086;&#1088;&#1084;&#1091;&#1083;&#1099;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#1042;&#1099;&#1074;&#1086;&#1076; &#1092;&#1086;&#1088;&#1084;&#1091;&#1083;&#1099; &#1089; &#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093; &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;<a class="anchor-link" href="#&#1042;&#1099;&#1074;&#1086;&#1076;-&#1092;&#1086;&#1088;&#1084;&#1091;&#1083;&#1099;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#182;</a></h2><p><a href="https://habr.com/ru/post/423731/">https://habr.com/ru/post/423731/</a></p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">hydrcalc</span>
+<span class="n">hydrcalc</span><span class="o">.</span><span class="n">types</span>
+<span class="c1">#элементы трубопровода</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[&#39;pipe&#39;, &#39;elbow&#39;, &#39;Kv&#39;, &#39;lrc&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Обозначения переменных:<br>
-rc - суммарный коэффициент сопротивления $\zeta_{сум}$ (rc - сокращённо от resistance coefficient)<br>
-dp - потери давления $\Delta p$, Па<br>
-rho - плотность $\rho$, $кг/м^3$<br>
-Q - расход, $м^3/с$<br>
-Kv - пропускная способность $K_V$, $м^3/ч$<br>
-w - скорость $w$, $м/с$<br>
-F - площадь внутреннего сечения трубопровода, $м^2$<br>
-D - внешний диаметр трубы, $мм$<br>
-h - толщина стенки трубы, $мм$<br></p>
+<p>'pipe' - труба, 'elbow' - отвод, 'Kv' - значение пропускной сособности, 'lrc' - значение коэффициента местного сопротивления.</p>
+<p>Так же словарь должен содержать значения параметров элемента трубопровода.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Создаём символьные переменные</span>
-<span class="n">Q</span><span class="p">,</span> <span class="n">Kv</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;Q K_V w F&#39;</span><span class="p">)</span>
-<span class="n">D</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;D h pi&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hydrcalc</span><span class="o">.</span><span class="n">params</span>
+<span class="c1">#Список ключей параметров для каждого элемента</span>
 </pre></div>
 
      </div>
@@ -14379,19 +14383,81 @@ h - толщина стенки трубы, $мм$<br></p>
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;pipe&#39;: [&#39;D&#39;, &#39;Delta&#39;, &#39;kvisc&#39;, &#39;qty&#39;],
+ &#39;elbow&#39;: [&#39;D&#39;, &#39;deg&#39;, &#39;RD&#39;, &#39;Delta&#39;, &#39;kvisc&#39;, &#39;qty&#39;],
+ &#39;Kv&#39;: [&#39;D&#39;, &#39;value&#39;, &#39;qty&#39;],
+ &#39;lrc&#39;: [&#39;D&#39;, &#39;value&#39;, &#39;qty&#39;]}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>'D' - внутренний диаметр, м; 'Delta' - абсолютная шероховатость внутренних стенок элемента, м; 'kvisc' - кинематическая вязкость рабочей среды, м2/с; 'deg' - угол поворота отвода, градусы; 'RD' - относительный радиус закругления отвода; 'value' - значение пропускной способности (для элемента 'Kv') или значение коэффициента местного сопротивления (для элемента 'lrc'); 'qty' - количество данных элементов в трубопроводе (для 'pipe' 'qty' -  это длина трубы в метрах).</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dp</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="c1">#из определения Kv, Па</span>
-<span class="n">rho</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="c1">#из определения Kv, кг/м3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Пример задания параметров для отвода</span>
+<span class="n">elbow</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;deg&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s1">&#39;RD&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;Delta&#39;</span><span class="p">:</span> <span class="mf">0.2e-3</span><span class="p">,</span> <span class="s1">&#39;kvisc&#39;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">elbow</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;type&#39;: &#39;elbow&#39;,
+ &#39;D&#39;: 0.1,
+ &#39;deg&#39;: 90,
+ &#39;RD&#39;: 1.5,
+ &#39;Delta&#39;: 0.0002,
+ &#39;kvisc&#39;: 1e-06,
+ &#39;qty&#39;: 2}</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14400,8 +14466,10 @@ h - толщина стенки трубы, $мм$<br></p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="mf">1e-6</span>
-<span class="n">F</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">elems</span> <span class="o">=</span> <span class="p">[</span><span class="n">elbow</span><span class="p">]</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1">#объёмный расход, м3/ч</span>
+<span class="c1">#Найдём потери давления в отводе в метрах водяного столба</span>
+<span class="n">ppln_calc_dH</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">elems</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14422,8 +14490,8 @@ h - толщина стенки трубы, $мм$<br></p>
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle 2.5 \cdot 10^{-7} \pi \left(D - 2 h\right)^{2}$
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[0.13437720561433802]</pre>
 </div>
 
 </div>
@@ -14432,14 +14500,22 @@ $\displaystyle 2.5 \cdot 10^{-7} \pi \left(D - 2 h\right)^{2}$
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Можно задать значение параметров по умолчанию. Например, внутренний диаметр, шероховатость стенок, кинематическая вязкость рабочей среды для всех элементов трубопровода скорее всего будут одинаковыми. Для задания значений параметров по умолчанию необходимо их передать в функцию <code>ppln_calc_dH</code> в качестве именованных параметров.</p>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">Kv</span> <span class="o">/</span> <span class="mi">3600</span>
-<span class="n">Q</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">elbow</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;deg&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s1">&#39;RD&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+<span class="n">elems</span> <span class="o">=</span> <span class="p">[</span><span class="n">elbow</span><span class="p">,</span> <span class="n">pipe</span><span class="p">]</span>
+<span class="n">ppln_calc_dH</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">elems</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">Delta</span> <span class="o">=</span> <span class="mf">0.2e-3</span><span class="p">,</span> <span class="n">kvisc</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14460,8 +14536,8 @@ $\displaystyle 2.5 \cdot 10^{-7} \pi \left(D - 2 h\right)^{2}$
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle \frac{K_{V}}{3600}$
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[0.13437720561433802, 1.9466690247241643]</pre>
 </div>
 
 </div>
@@ -14470,14 +14546,20 @@ $\displaystyle \frac{K_{V}}{3600}$
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Для формирования словаря параметров с значениямипо умолчанию удобно использовать функцию <code>ppln_get_defs</code>.</p>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">/</span> <span class="n">F</span>
-<span class="n">w</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">hydrcalc</span> <span class="kn">import</span> <span class="n">ppln_get_defs</span>
+<span class="n">help</span><span class="p">(</span><span class="n">ppln_get_defs</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14493,15 +14575,23 @@ $\displaystyle \frac{K_{V}}{3600}$
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Help on function ppln_get_defs in module hydrcalc:
 
+ppln_get_defs(D, Delta=0.0002, kvisc=1e-06, deg=90, RD=1.5, qty=1)
+    Формирование словаря параметров элементов трубопровода со значениями по умолчанию
+    D: внутренний диаметр, м
+    Delta: абсолютная шероховатость, м (по умолчанию - 0.2 мм)
+    kvisc: кинематическая вязкость, м2/с (по умолчанию - вязкость воды при 20 С)
+    deg: угол поворота отвода, градусы (по умолчанию - 90 градусов)
+    RD: относительный радиус закругления отвода (по умолчанию - R/D = 1,5)
+    qty: количество элементов трубопровода каждого типа (по умолчанию - 1)
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle \frac{1111.11111111111 K_{V}}{\pi \left(D - 2 h\right)^{2}}$
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -14514,10 +14604,8 @@ $\displaystyle \frac{1111.11111111111 K_{V}}{\pi \left(D - 2 h\right)^{2}}$
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Записываем формулу (1)</span>
-<span class="n">rc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dp</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">w</span> <span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="c1">#и выводим окончательный результат</span>
-<span class="n">rc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">defs</span> <span class="o">=</span> <span class="n">ppln_get_defs</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1">#передаём значение диаметра</span>
+<span class="n">defs</span> 
 </pre></div>
 
      </div>
@@ -14538,8 +14626,8 @@ $\displaystyle \frac{1111.11111111111 K_{V}}{\pi \left(D - 2 h\right)^{2}}$
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle \frac{0.000162 \pi^{2} \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;D&#39;: 0.1, &#39;Delta&#39;: 0.0002, &#39;kvisc&#39;: 1e-06, &#39;deg&#39;: 90, &#39;RD&#39;: 1.5, &#39;qty&#39;: 1}</pre>
 </div>
 
 </div>
@@ -14554,11 +14642,11 @@ $\displaystyle \frac{0.000162 \pi^{2} \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Присваиваем pi числовое значение и обновляем выражения, где фигурировало pi</span>
-<span class="kn">import</span> <span class="nn">math</span> <span class="c1">#возьмём значение pi из модуля math</span>
-<span class="n">pi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> 
-<span class="n">F</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="mf">1e-6</span>
-<span class="n">F</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Теперь нет необходимости задавать для каждого элемента все параметры</span>
+<span class="n">elbow</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+<span class="n">elems</span> <span class="o">=</span> <span class="p">[</span><span class="n">elbow</span><span class="p">,</span> <span class="n">pipe</span><span class="p">]</span>
+<span class="n">ppln_calc_dH</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">elems</span><span class="p">,</span> <span class="o">**</span><span class="n">defs</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14579,8 +14667,8 @@ $\displaystyle \frac{0.000162 \pi^{2} \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle 7.85398163397448 \cdot 10^{-7} \left(D - 2 h\right)^{2}$
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[0.13437720561433802, 1.9466690247241643]</pre>
 </div>
 
 </div>
@@ -14589,14 +14677,24 @@ $\displaystyle 7.85398163397448 \cdot 10^{-7} \left(D - 2 h\right)^{2}$
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1075;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;-&#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1072;">&#1055;&#1088;&#1080;&#1084;&#1077;&#1088; &#1075;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072; &#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1072;<a class="anchor-link" href="#&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1075;&#1080;&#1076;&#1088;&#1072;&#1074;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;-&#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1072;">&#182;</a></h2><p>Расмотрим следующую схему: насос перекачивает воду температурой 20 С из одного бака в другой с производительностью $Q = 50\, м^3/ч$. На всасе и на напоре насоса стоят запорные вентили, общая длина труб - 50 метров, внутренний диаметр трубопровода 100 мм (0.1 м), количество отводов 90 градусов - 10 штук, отводов 45 градусов - 4 штуки, относительный радиус загругления отводов $R/D = 2$, шероховатость внутренних стенок трубопровода $\Delta = 0.3\, мм$.</p>
+<p><img src="0026_Scheme.png"  alt="Отвод" width="400" align = "center"></img></p>
+<p>Значение коэффициента местного сопротивления при входе воды в трубопровод из бака составляет $\zeta_{вх} = 0.5$, при выходе из трубопровода (потери с выходной скоростью) - $\zeta_{вых} = 1.0$. Для запорных вентелей производители предоставляют данные о значении пропускной способности запорного вентиля в полностью открытом положении. Примем, что для полностью открытого запорного вентиля DN 100, значение пропускной способности равно $K_V = 185\,м^3/ч$.</p>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">/</span> <span class="n">F</span>
-<span class="n">w</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1"># расход через трубопровод, м3/ч</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># внутренний диаметр трубопровода, м</span>
+<span class="n">defs</span> <span class="o">=</span> <span class="n">ppln_get_defs</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="c1"># формируем словарь параметров со значениями по умолчанию </span>
+<span class="n">defs</span>
 </pre></div>
 
      </div>
@@ -14617,8 +14715,8 @@ $\displaystyle 7.85398163397448 \cdot 10^{-7} \left(D - 2 h\right)^{2}$
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle \frac{353.677651315323 K_{V}}{\left(D - 2 h\right)^{2}}$
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;D&#39;: 0.1, &#39;Delta&#39;: 0.0002, &#39;kvisc&#39;: 1e-06, &#39;deg&#39;: 90, &#39;RD&#39;: 1.5, &#39;qty&#39;: 1}</pre>
 </div>
 
 </div>
@@ -14633,8 +14731,8 @@ $\displaystyle \frac{353.677651315323 K_{V}}{\left(D - 2 h\right)^{2}}$
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#формула для вычисления суммарного коэффициента сопротивления по Kv</span>
-<span class="n">rc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dp</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">w</span> <span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#корректируем значения по умолчанию некоторых параметров</span>
+<span class="n">defs</span><span class="p">[</span><span class="s1">&#39;Delta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.3e-3</span><span class="p">;</span> <span class="n">defs</span><span class="p">[</span><span class="s1">&#39;RD&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.</span> 
 </pre></div>
 
      </div>
@@ -14642,18 +14740,20 @@ $\displaystyle \frac{353.677651315323 K_{V}}{\left(D - 2 h\right)^{2}}$
 </div>
 </div>
 
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="&#1044;&#1083;&#1103;-D-&#1080;-h,-&#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1085;&#1099;&#1093;-&#1074;-&#1084;&#1080;&#1083;&#1083;&#1080;&#1084;&#1077;&#1090;&#1088;&#1072;&#1093;">&#1044;&#1083;&#1103; D &#1080; h, &#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1085;&#1099;&#1093; &#1074; &#1084;&#1080;&#1083;&#1083;&#1080;&#1084;&#1077;&#1090;&#1088;&#1072;&#1093;<a class="anchor-link" href="#&#1044;&#1083;&#1103;-D-&#1080;-h,-&#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1085;&#1099;&#1093;-&#1074;-&#1084;&#1080;&#1083;&#1083;&#1080;&#1084;&#1077;&#1090;&#1088;&#1072;&#1093;">&#182;</a></h3>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Формируем список элементов трубопровода</span>
+<span class="n">enter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span> <span class="c1">#вход в трубопровод</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span> <span class="c1"># труба</span>
+<span class="n">elbow90</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span> <span class="c1"># отвод 90 градусов</span>
+<span class="n">elbow45</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;deg&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span> <span class="c1"># отвод 45 градусов</span>
+<span class="n">stop_valve</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;Kv&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">185</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span> <span class="c1">#запорный вентиль</span>
+<span class="n">exit</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span> <span class="c1">#выход из трубопровода</span>
+<span class="n">elems</span> <span class="o">=</span><span class="p">[</span><span class="n">enter</span><span class="p">,</span> <span class="n">pipe</span><span class="p">,</span> <span class="n">elbow90</span><span class="p">,</span> <span class="n">elbow45</span><span class="p">,</span> <span class="n">stop_valve</span><span class="p">,</span> <span class="n">exit</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14661,41 +14761,13 @@ $\displaystyle \frac{353.677651315323 K_{V}}{\left(D - 2 h\right)^{2}}$
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
-
-
-
-
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle \frac{0.00159887591297648 \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="&#1044;&#1083;&#1103;-D-&#1080;-h,-&#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1085;&#1099;&#1093;-&#1074;-&#1084;&#1077;&#1090;&#1088;&#1072;&#1093;">&#1044;&#1083;&#1103; D &#1080; h, &#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1085;&#1099;&#1093; &#1074; &#1084;&#1077;&#1090;&#1088;&#1072;&#1093;<a class="anchor-link" href="#&#1044;&#1083;&#1103;-D-&#1080;-h,-&#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1085;&#1099;&#1093;-&#1074;-&#1084;&#1077;&#1090;&#1088;&#1072;&#1093;">&#182;</a></h3>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rc</span> <span class="o">*</span> <span class="mf">1e3</span> <span class="o">**</span> <span class="mi">4</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">elems</span>
 </pre></div>
 
      </div>
@@ -14716,8 +14788,13 @@ $\displaystyle \frac{0.00159887591297648 \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle \frac{1598875912.97648 \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[{&#39;type&#39;: &#39;lrc&#39;, &#39;value&#39;: 0.5},
+ {&#39;type&#39;: &#39;pipe&#39;, &#39;qty&#39;: 50},
+ {&#39;type&#39;: &#39;elbow&#39;, &#39;qty&#39;: 10},
+ {&#39;type&#39;: &#39;elbow&#39;, &#39;deg&#39;: 45, &#39;qty&#39;: 4},
+ {&#39;type&#39;: &#39;Kv&#39;, &#39;value&#39;: 185, &#39;qty&#39;: 2},
+ {&#39;type&#39;: &#39;lrc&#39;, &#39;value&#39;: 1}]</pre>
 </div>
 
 </div>
@@ -14726,19 +14803,15 @@ $\displaystyle \frac{1598875912.97648 \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
 
 </div>
 
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="&#1055;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1077;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1086;&#1074;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#1055;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1077; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1086;&#1074; &#1089; &#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093; &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;<a class="anchor-link" href="#&#1055;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1077;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1086;&#1074;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1100;&#1085;&#1099;&#1093;-&#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1081;">&#182;</a></h2>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Можно найти значение коэффициена сопротивления для конкретных значений Kv, D, h</span>
-<span class="n">rc</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">D</span><span class="p">,</span> <span class="mi">108</span><span class="p">),</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">Kv</span><span class="p">,</span> <span class="mi">100</span><span class="p">)])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Расчёт потерь даления, метры водяного столба</span>
+<span class="n">dHs</span> <span class="o">=</span> <span class="n">ppln_calc_dH</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">elems</span><span class="p">,</span> <span class="o">**</span><span class="n">defs</span><span class="p">)</span>
+<span class="n">dHs</span>
 </pre></div>
 
      </div>
@@ -14759,8 +14832,13 @@ $\displaystyle \frac{1598875912.97648 \left(D - 2 h\right)^{4}}{K_{V}^{2}}$
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle 14.7475223392043$
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[0.07972133771466502,
+ 2.1466099864475305,
+ 0.6467737875056502,
+ 0.14983068967051927,
+ 1.4897241971920099,
+ 0.15944267542933005]</pre>
 </div>
 
 </div>
@@ -14769,15 +14847,21 @@ $\displaystyle 14.7475223392043$
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Для того чтобы узнать общие потери давления в трубопроводе необходимо сумировать потери давления в каждом элементе трубопровода</p>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Зависимость коэффициена сопротивления от Kv для трубопровода 108х5</span>
-<span class="n">rc_Kv</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">D</span><span class="p">,</span> <span class="mi">108</span><span class="p">),</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
-<span class="n">rc_Kv</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dH</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dHs</span><span class="p">)</span>
+<span class="n">dH</span>
+<span class="c1">#потери давления в трубопроводе в метрах водяного столба</span>
 </pre></div>
 
      </div>
@@ -14798,62 +14882,8 @@ $\displaystyle 14.7475223392043$
 
 
 
-<div class="jp-RenderedLatex jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/latex">
-$\displaystyle \frac{147475.223392043}{K_{V}^{2}}$
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Kvs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">rcs</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">kv</span> <span class="ow">in</span> <span class="n">Kvs</span><span class="p">:</span>
-    <span class="n">rcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rc_Kv</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Kv</span><span class="p">,</span> <span class="n">kv</span><span class="p">))</span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Kvs</span> <span class="c1">#м3/ч</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
-
-
-
-
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]</pre>
+<pre>4.672102673959705</pre>
 </div>
 
 </div>
@@ -14862,308 +14892,16 @@ $\displaystyle \frac{147475.223392043}{K_{V}^{2}}$
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rcs</span>
-</pre></div>
-
-     </div>
 </div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[1474.75223392043,
- 655.445437297970,
- 368.688058480108,
- 235.960357427269,
- 163.861359324492,
- 120.387937462892,
- 92.1720146200270,
- 72.8272708108856,
- 58.9900893568173,
- 48.7521399643118,
- 40.9653398311231,
- 34.9053783176434,
- 30.0969843657231,
- 26.2178174919188,
- 23.0430036550068,
- 20.4117956251963,
- 18.2068177027214,
- 16.3407449741876,
- 14.7475223392043]</pre>
-</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;">&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;<a class="anchor-link" href="#&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;">&#182;</a></h3><ol>
+<li><a id='ref1'></a><a href="https://medsv.github.io/dzen/0023/grcpipe.html">Расчёт потерь давления (напора) в трубе</a></li>
+<li><a id='ref2'></a><a href="https://medsv.github.io/dzen/0024/grcelbow.html">Расчёт потерь давления (напора) в отводе</a></li>
+<li><a href="https://medsv.github.io/dzen/0005/Коэффициент_сопротивления_по_Kv.html">Определение суммарного коэффициента сопротивления по значению пропускной способности Kv</a></li>
+</ol>
 
 </div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Создадим таблицу</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Kv, м3/ч&#39;</span><span class="p">:</span> <span class="n">Kvs</span><span class="p">,</span> <span class="s1">&#39;$\zeta_</span><span class="si">{сум}</span><span class="s1">$&#39;</span><span class="p">:</span> <span class="n">rcs</span><span class="p">})</span>
-<span class="n">table</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Kv, м3/ч</th>
-      <th>$\zeta_{сум}$</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>10</td>
-      <td>1474.75223392043</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15</td>
-      <td>655.445437297970</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>20</td>
-      <td>368.688058480108</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>25</td>
-      <td>235.960357427269</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>30</td>
-      <td>163.861359324492</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>35</td>
-      <td>120.387937462892</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>40</td>
-      <td>92.1720146200270</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>45</td>
-      <td>72.8272708108856</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>50</td>
-      <td>58.9900893568173</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>55</td>
-      <td>48.7521399643118</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>60</td>
-      <td>40.9653398311231</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>65</td>
-      <td>34.9053783176434</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>70</td>
-      <td>30.0969843657231</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>75</td>
-      <td>26.2178174919188</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>80</td>
-      <td>23.0430036550068</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>85</td>
-      <td>20.4117956251963</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>90</td>
-      <td>18.2068177027214</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>95</td>
-      <td>16.3407449741876</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>100</td>
-      <td>14.7475223392043</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Сохранение результатов расчёта в csv-файл:</span>
-<span class="c1">#table.to_csv(&#39;Коэффициент сопротивления от Kv.csv&#39;, sep = &#39;;&#39;)</span>
-<span class="c1">#Сохранение результатов расчёта в html-файл:</span>
-<span class="c1">#table.to_html(&#39;Коэффициент сопротивления от Kv.html&#39;)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Нарисуем график</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Kvs</span><span class="p">,</span> <span class="n">rcs</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Зависимость $\zeta_</span><span class="si">{сум}</span><span class="s1">$ от $K_V$ для трубопровода 108х5&#39;</span> <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$K_V, м^3/ч$&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\zeta_</span><span class="si">{сум}</span><span class="s1">$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-
-
-<div class="jp-RenderedImage jp-OutputArea-output ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
