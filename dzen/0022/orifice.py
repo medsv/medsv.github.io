@@ -1,5 +1,9 @@
 """
 В модуле размещён класс Orifice, предназначенный для расчёта параметров дроссельной шайбы.
+-------------------------------------------------
+'Инженерные расчёты на Python'
+https://zen.yandex.ru/id/5f33dcd5554adc5b33aaee83
+https://medsv.github.io/
 """
 __author__ = "Sergey Medvedev"
 __copyright__ = "Sergey Medvedev, 2020"
