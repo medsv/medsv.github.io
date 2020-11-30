@@ -3,12 +3,9 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Поверочный расчёт теплообменника</title>
-<META NAME="DESCRIPTION" CONTENT="Поверочный расчёт теплообменника прямоточного и противоточного типов"/>
+<title>Расчёт кавитационного запаса</title>
+<META NAME="DESCRIPTION" CONTENT="Расчёт кавитационного запаса на входе насоса"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-
-
-
 
 <style type="text/css">
     pre { line-height: 125%; margin: 0; }
@@ -14261,73 +14258,33 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="&#1055;&#1086;&#1074;&#1077;&#1088;&#1086;&#1095;&#1085;&#1099;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1090;&#1077;&#1087;&#1083;&#1086;&#1086;&#1073;&#1084;&#1077;&#1085;&#1085;&#1080;&#1082;&#1072;">&#1055;&#1086;&#1074;&#1077;&#1088;&#1086;&#1095;&#1085;&#1099;&#1081; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090; &#1090;&#1077;&#1087;&#1083;&#1086;&#1086;&#1073;&#1084;&#1077;&#1085;&#1085;&#1080;&#1082;&#1072;<a class="anchor-link" href="#&#1055;&#1086;&#1074;&#1077;&#1088;&#1086;&#1095;&#1085;&#1099;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1090;&#1077;&#1087;&#1083;&#1086;&#1086;&#1073;&#1084;&#1077;&#1085;&#1085;&#1080;&#1082;&#1072;">&#182;</a></h1>
+<h1 id="&#1056;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1079;&#1072;&#1087;&#1072;&#1089;&#1072;-&#1085;&#1072;&#1089;&#1086;&#1089;&#1072;">&#1056;&#1072;&#1089;&#1095;&#1105;&#1090; &#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086; &#1079;&#1072;&#1087;&#1072;&#1089;&#1072; &#1085;&#1072;&#1089;&#1086;&#1089;&#1072;<a class="anchor-link" href="#&#1056;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1079;&#1072;&#1087;&#1072;&#1089;&#1072;-&#1085;&#1072;&#1089;&#1086;&#1089;&#1072;">&#182;</a></h1>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>В данной статье описана методика проведения поверочного расчёта теплообменника прямоточного и противоточного типа и пример выполнения поверочного расчёта с использованием класса HeatExchanger из модуля heatexchanger (<a href="https://medsv.github.io/dzen/0025/heatexchanger.py">скачать</a>).</p>
-<p><img src="0025_he.png"  alt="Отвод" width="500" align = "center"></img></p>
-<p>По результатам конструкторского расчёта известны проектные значения следующих параметров теплообменника:</p>
-<ol>
-<li>$t_х^{вх}$ - температура холодного потока на входе в теплообменник, C;</li>
-<li>$t_х^{вых}$ - температура холодного потока на выходе из теплообменника, C;</li>
-<li>$t_г^{вх}$ - температура горячего потока на входе в теплообменник, C;</li>
-<li>$t_г^{вых}$ - температура горячего потока на выходе из теплообменника, C;</li>
-<li>$Q_х$ - тепловая мощность, получаемая холодным потоком от горячего, Вт;</li>
-<li>$C_х$ - теплоёмкость холодного потока, Дж/(кг⋅с);</li>
-<li>$C_г$ - теплоёмкость горячего потока, Дж/(кг⋅с);</li>
-<li>$F$ - площадь поверхностей теплообмена, $м^2$;</li>
-<li>$k$ - коэффициент теплопередачи, $Вт/(м^2\cdot K)$,</li>
-<li>$\eta$ - КПД теплообменника.</li>
-</ol>
-$$Q_х = k \overline{\Delta t} F\qquad \qquad (1)$$<p>где $\overline{\Delta t}$ - среднее значение температурного напора
-$$\overline{\Delta t} = \frac{\Delta t_{нач} - \Delta t_{кон}}{\ln(\Delta t_{нач}/\Delta t_{кон})}$$
-Для теплообменника прямоточного типа
-$$\Delta t_{нач} = t_г^{вх} - t_{х}^{вх};\, \Delta t_{кон} = t_г^{вых} - t_{х}^{вых}$$
-Для теплообменника противоточного типа
-$$\Delta t_{нач} = t_г^{вх} - t_{х}^{вых};\, \Delta t_{кон} = t_г^{вых} - t_{х}^{вх}$$</p>
-<p>Для того чтобы нагревать в теплообменнике поток холодной жидкости с массовым расходом $G$ (кг/с) теплоёмкостью $c_p$ (Дж/(кг$\cdot$К)) на $\Delta t$ градусов, необходимо подводить к рассматриваемому потоку тепловую мощность $Q_х$, Вт. При этом горячий поток жидкости отдаёт тепловую мощность $Q_г = Q_х/\eta$, где $\eta$ - КПД теплообменника.</p>
-$$Q = Gc_p\Delta t$$<p>или $$Q = С\Delta t$$ 
-где $C = Gc_p$ - теплоёмкость потока, Дж/(кг$\cdot$с)</p>
-$$Q_х = C_{х}(t_{х}^{вых} - t_х^{вх})\qquad \qquad (2)$$$$Q_х = C_{г}(t_г^{вх} - t_{г}^{вых})\eta\qquad \qquad (3)$$<p>$C_{х}$, $C_{г}$ - теплоёмкость холодного и горячего потока соответственно. Т.к. теплоёмкости рабочих сред холодного и горячего потоков можно считать неизменными, то изменение теплоёмкости потока будет однозначно определяться изменением массового расхода рабочей среды.</p>
-<p>Итак, в нашем распоряжении имеются три уравнения и семь независимых параметров: $t_х^{вх}$, $t_х^{вых}$, $t_г^{вх}$, $t_г^{вых}$, $C_{х}$, $C_{г}$, $Q_х$.</p>
+<p><b>Надкавитационный напор</b> на входе (кавитационный запас), NPSH (net positive suction head) - полное абсолютное давление жидкости в сечении входного патрубка насоса за вычетом давления кипения жидкости при данной температуре жидкости.</p>
+$$\mathrm{NPSH} = \bar{p}_{абс} - p_{кип}$$<p>Статическое абсолютное давление находится по формуле:</p>
+$$p_{абс} = p_м + p_{атм}$$<p>$p_м$ - статическое манометрическое (избыточное) давление в исследуемой точке, Па; $p_{атм}$ - атмосферное давление, Па.</p>
+<p>Полное давление (может быть как монометрическим так и абсолютным):</p>
+$$\bar{p} = p + \frac{\rho w^2}{2}$$<p>где $p$ - статическое давление (монометрическое или абсолютное), Па; $\rho$ - плотность жидкости, $кг/м^3$, $w$ - скорость жидкости в сечении входного патрубка насоса, м/с.</p>
+<p>Надкавитационный напор измеряется в метрах столба жидкости. Перевод давления из Па в метры столба жидкости производится по формуле:</p>
+$$H = \frac{p}{\rho g}$$<p>где $g = 9{,}80665$ - ускорение свободного падения, $м/с^2$</p>
+$$\mathrm{NPSH} = \bar{H}_{абс} - H_{кип}$$$$\mathrm{NPSH} = H_{внеш} + (z_ж - z_{вх}) - \Delta H + \frac{w^2}{2g} - H_{кип}$$<p>где $H_{внеш}$ - давление над поверхностью жидкости в исходном баке (для открытой системы атмосферное давление $H_{атм}$), м; $(z_ж - z_{вх})$ - давление столба жидкости, м; $z_ж$ - отметка поверхности жидкости относительно произвольно выбранной плоскости отсчёта $Z_0$, м; $z_{вх}$ - отметка оси входного патрубка, м; $\Delta H$ - потери давления (напора) при движении жидкости объёмным расходом $Q$ ($м^3/ч$) во входном трубопроводе, м, $H_{кип}$ - давление кипения жидкости (м) при температуре, равной температуре жидкости $t$ ($^\circ C$).</p>
+<p><img src="0027_Scheme.png"  alt="Расчётная схема" width="500" align = "center"></img></p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="&#1059;&#1095;&#1105;&#1090;-&#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;-&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103;-&#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072;-&#1090;&#1077;&#1087;&#1083;&#1086;&#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1095;&#1080;-&#1087;&#1088;&#1080;-&#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1080;-&#1088;&#1072;&#1089;&#1093;&#1086;&#1076;&#1072;-&#1088;&#1072;&#1073;&#1086;&#1095;&#1077;&#1081;-&#1089;&#1088;&#1077;&#1076;&#1099;">&#1059;&#1095;&#1105;&#1090; &#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072; &#1090;&#1077;&#1087;&#1083;&#1086;&#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1095;&#1080; &#1087;&#1088;&#1080; &#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1080; &#1088;&#1072;&#1089;&#1093;&#1086;&#1076;&#1072; &#1088;&#1072;&#1073;&#1086;&#1095;&#1077;&#1081; &#1089;&#1088;&#1077;&#1076;&#1099;<a class="anchor-link" href="#&#1059;&#1095;&#1105;&#1090;-&#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;-&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103;-&#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072;-&#1090;&#1077;&#1087;&#1083;&#1086;&#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1095;&#1080;-&#1087;&#1088;&#1080;-&#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1080;-&#1088;&#1072;&#1089;&#1093;&#1086;&#1076;&#1072;-&#1088;&#1072;&#1073;&#1086;&#1095;&#1077;&#1081;-&#1089;&#1088;&#1077;&#1076;&#1099;">&#182;</a></h2>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>При изменении скорости течения рабочей среды (величины расхода) внутри теплообменника коэффициент теплопередачи теплообменника изменяется.<br>
-Без учёта термического сопротивления стенки, разделяющей два потока, формула для вычисления коэффициента теплопередачи имеет вид:</p>
-$$k = \frac{1}{1/\alpha_г + 1/\alpha_х} = \frac{\alpha_г \alpha_х}{\alpha_г + \alpha_х}$$<p>где $\alpha_г$, $\alpha_х$ - коэффициент теплоотдачи от горячего и к холодному потоку соответственно.
-Т.к. нам неизвестно как соотносятся между собой значения коэффициентов теплоотдачи горячего и холодного потоков, примем, что они равны.</p>
-$$k = \frac{\alpha \alpha}{\alpha + \alpha} = \frac{\alpha}{2}$$<p>Согласно формуле М. А. Михеева коэффициент теплопередачи при числе Рейнольдса $Re \ge 10^4$ (турбулентный режим течения) пропорционален $Re^{0.8}$. Коэффициент Рейнольдса $Re$ пропорционален скорости, а значит расходу потока, который в свою очередь, пропорционален теплоёмкости потока $C$.</p>
-<p>Коэффициент теплопередачи при расходах отличных от проектных значений равен:</p>
-$$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проектное значение коэффиента теплопередачи, $a = C_г/C_г^п$, $b = C_х/C_х^п$, где $C$ - теплоёмкость потока в рассматриваемом режиме работы, $C^п$ - проектное значение теплоёмкости потока.</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1087;&#1086;&#1074;&#1077;&#1088;&#1086;&#1095;&#1085;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;-&#1090;&#1077;&#1087;&#1083;&#1086;&#1086;&#1073;&#1084;&#1077;&#1085;&#1085;&#1080;&#1082;&#1072;">&#1055;&#1088;&#1080;&#1084;&#1077;&#1088; &#1087;&#1086;&#1074;&#1077;&#1088;&#1086;&#1095;&#1085;&#1086;&#1075;&#1086; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072; &#1090;&#1077;&#1087;&#1083;&#1086;&#1086;&#1073;&#1084;&#1077;&#1085;&#1085;&#1080;&#1082;&#1072;<a class="anchor-link" href="#&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1087;&#1086;&#1074;&#1077;&#1088;&#1086;&#1095;&#1085;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;-&#1090;&#1077;&#1087;&#1083;&#1086;&#1086;&#1073;&#1084;&#1077;&#1085;&#1085;&#1080;&#1082;&#1072;">&#182;</a></h2>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Рассмотрим пластинчатый маслоохладитель (противоточный) со следующими проектными параметрами:</p>
+<h2 id="&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;-&#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1079;&#1072;&#1087;&#1072;&#1089;&#1072;">&#1055;&#1088;&#1080;&#1084;&#1077;&#1088; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072; &#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086; &#1079;&#1072;&#1087;&#1072;&#1089;&#1072;<a class="anchor-link" href="#&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;-&#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1079;&#1072;&#1087;&#1072;&#1089;&#1072;">&#182;</a></h2><p>При расчёте кавитационного запаса используются следующие ранее разработанные инструменты:</p>
 <ol>
-<li>$Q_х = 450\, кВт$</li>
-<li>$t_{г}^{вх} = 70\,^{\circ}C$</li>
-<li>$t_{г}^{вых} = 55.3\,^{\circ}C$</li>
-<li>$t_{х}^{вх} = 52\,^{\circ}C$</li>
-<li>$t_{х}^{вых} = 56\,^{\circ}C$</li>
-<li>$\eta = 0.97$</li>
+<li>Определение плотности воды по температуре и давлению (см. <a href="#refs">[1]</a>);</li>
+<li>Определение давления насыщенного водяного пара (давление кипения воды) по температуре <a href="#refs">[2]</a>;</li>
+<li>Определение значения динамической вязкости воды по температуре и плотности <a href="#refs">[3]</a>;</li>
+<li>Расчёт потерь давления при движении жидкости в трубопроводе  <a href="#refs">[4]</a>.</li>
 </ol>
+<p>Все необходимые для расчёта кавитационного запаса модули на Python собраны в один архив (<a href="https://medsv.github.io/dzen/0027/NPSH.zip">скачать</a>).</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14336,7 +14293,10 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q_cold</span> <span class="o">=</span> <span class="mf">450e3</span><span class="p">;</span> <span class="n">t_hot_in</span> <span class="o">=</span> <span class="mi">70</span><span class="p">;</span> <span class="n">t_hot_out</span> <span class="o">=</span> <span class="mf">55.3</span><span class="p">;</span> <span class="n">t_cold_in</span> <span class="o">=</span> <span class="mi">52</span><span class="p">;</span> <span class="n">t_cold_out</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span> <span class="n">eff</span> <span class="o">=</span> <span class="mf">0.97</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">npsh</span> <span class="kn">import</span> <span class="n">calc_NPSH</span>  <span class="c1"># расчёт имеющегося надкавитационного напора на входе в насос</span>
+<span class="kn">from</span> <span class="nn">region1</span> <span class="kn">import</span> <span class="n">Region1</span>  <span class="c1"># расчёт параметров воды</span>
+<span class="kn">from</span> <span class="nn">calcwsdvisc</span> <span class="kn">import</span> <span class="n">calc_ws_dvisc</span>  <span class="c1"># расчёт динамической вязкости воды</span>
+<span class="kn">from</span> <span class="nn">hydrcalc</span> <span class="kn">import</span> <span class="n">ppln_calc_dH</span><span class="p">,</span> <span class="n">ppln_get_defs</span>  <span class="c1"># расчёт потерь давления в трубопроводе</span>
 </pre></div>
 
      </div>
@@ -14344,15 +14304,26 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 </div>
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="&#1048;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1077;-&#1076;&#1072;&#1085;&#1085;&#1099;&#1077;">&#1048;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1077; &#1076;&#1072;&#1085;&#1085;&#1099;&#1077;<a class="anchor-link" href="#&#1048;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1077;-&#1076;&#1072;&#1085;&#1085;&#1099;&#1077;">&#182;</a></h3><p>Необходимо рассмотреть самое неблагоприятное для обеспечения безкавитационной работы насоса сочетание внешних условий.
+Подводящий трубопровод 89х3,5, внутренний диаметр входного патрубка насоса 40 мм, расход воды 10 $м^3/ч$, шероховатость внутренних стенок 0,3 мм.</p>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">heatexchanger</span> <span class="kn">import</span> <span class="n">HeatExchanger</span>
-<span class="c1">#Создаём объект класса HeatExchanger</span>
-<span class="n">he</span> <span class="o">=</span> <span class="n">HeatExchanger</span><span class="p">(</span><span class="n">t_hot_in</span><span class="p">,</span> <span class="n">t_hot_out</span><span class="p">,</span> <span class="n">t_cold_in</span><span class="p">,</span> <span class="n">t_cold_out</span><span class="p">,</span> <span class="n">Q_cold</span><span class="p">,</span> <span class="n">eff</span><span class="p">,</span> <span class="n">hetype</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mi">101325</span> <span class="o">*</span> <span class="mf">0.95</span>  <span class="c1"># давление над поверхностью воды (предельно низкое атмосферное давление), Па</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mi">90</span>  <span class="c1"># температура воды, С</span>
+<span class="n">z_s</span> <span class="o">=</span> <span class="o">.</span><span class="mi">6</span>  <span class="c1"># высотная отметка поверхности воды в баке (минимальный уровень), м</span>
+<span class="n">z_p</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.33</span>  <span class="c1"># высотная отметка оси входного патрубка насоса, м</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="mf">10.</span>  <span class="c1"># объёмный расход, м3/ч</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.082</span>  <span class="c1"># внутренний диаметр входного трубопровода, м</span>
+<span class="n">D_p</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># внутренний диаметр входного патрубка насоса, м</span>
 </pre></div>
 
      </div>
@@ -14366,9 +14337,9 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Чтобы получить словарь входных данных необходимо вызвать метод get_inp_params</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">he</span><span class="o">.</span><span class="n">get_inp_params</span><span class="p">()</span>
-<span class="n">params</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">r1</span> <span class="o">=</span> <span class="n">Region1</span><span class="p">()</span>
+<span class="n">dens</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">r1</span><span class="o">.</span><span class="n">props_tp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">p</span><span class="p">)[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>  <span class="c1"># плотность воды, кг/м3 (см. [1])</span>
+<span class="n">dens</span>
 </pre></div>
 
      </div>
@@ -14390,62 +14361,24 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;t_hot_in&#39;: 70,
- &#39;t_hot_out&#39;: 55.3,
- &#39;t_cold_in&#39;: 52,
- &#39;t_cold_out&#39;: 56,
- &#39;C_hot&#39;: 31559.015358720804,
- &#39;C_cold&#39;: 112500.0,
- &#39;Q_cold&#39;: 450000.0}</pre>
+<pre>965.316345049121</pre>
 </div>
 
 </div>
 
 </div>
 
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Рассмотрим случай при котором $t_{х}^{вх} = 45\,^{\circ}C$, параметры маслоохладителя на стороне масла должны остаться неизменными. Следует найти $С_х$, $t_{х}^{вых}$, для этого данным параметрам следует присвоить <code>None</code>.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">45</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;C_cold&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">he</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">res</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dvisc</span> <span class="o">=</span> <span class="n">calc_ws_dvisc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dens</span><span class="p">)</span>  <span class="c1"># динамическая вязкость воды, Па*с (см. [3])</span>
+<span class="n">kvisc</span> <span class="o">=</span> <span class="n">dvisc</span> <span class="o">/</span> <span class="n">dens</span>  <span class="c1"># кинематическая вязкость воды, м2/с</span>
+<span class="n">kvisc</span>  <span class="c1"># кинематическая вязкость потребуется при расчёте потерь давления во входном трубопроводе</span>
 </pre></div>
 
      </div>
@@ -14461,29 +14394,77 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;t_hot_in&#39;: 70.0,
- &#39;t_hot_out&#39;: 55.3,
- &#39;t_cold_in&#39;: 45.0,
- &#39;t_cold_out&#39;: 56.03546293321047,
- &#39;C_hot&#39;: 31559.015358720804,
- &#39;C_cold&#39;: 40777.62779160301,
- &#39;Q_cold&#39;: 450000.0,
- &#39;Q_hot&#39;: 463917.5257731959,
- &#39;dt&#39;: 12.039461627339785,
- &#39;eff&#39;: 0.97,
- &#39;kF&#39;: 37377.08661149201}</pre>
+<pre>3.254676957062171e-07</pre>
 </div>
 
 </div>
 
 </div>
 
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="&#1056;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1087;&#1086;&#1090;&#1077;&#1088;&#1100;-&#1076;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103;-&#1074;&#1086;-&#1074;&#1093;&#1086;&#1076;&#1085;&#1086;&#1084;-&#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1077;">&#1056;&#1072;&#1089;&#1095;&#1105;&#1090; &#1087;&#1086;&#1090;&#1077;&#1088;&#1100; &#1076;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1074;&#1086; &#1074;&#1093;&#1086;&#1076;&#1085;&#1086;&#1084; &#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1077;<a class="anchor-link" href="#&#1056;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1087;&#1086;&#1090;&#1077;&#1088;&#1100;-&#1076;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103;-&#1074;&#1086;-&#1074;&#1093;&#1086;&#1076;&#1085;&#1086;&#1084;-&#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1077;">&#182;</a></h3><p>Подробно методика расчёта потерь давления во входном трубопроводе описана в <a href="#refs">[4]</a>.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">defs</span> <span class="o">=</span> <span class="n">ppln_get_defs</span><span class="p">(</span><span class="mf">0.082</span><span class="p">)</span>  <span class="c1"># труба 89х3,5</span>
+<span class="n">defs</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;D&#39;: 0.082, &#39;Delta&#39;: 0.0002, &#39;kvisc&#39;: 1e-06, &#39;deg&#39;: 90, &#39;RD&#39;: 1.5, &#39;qty&#39;: 1}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">defs</span><span class="p">[</span><span class="s1">&#39;Delta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.3e-3</span><span class="p">;</span> <span class="n">defs</span><span class="p">[</span><span class="s1">&#39;kvisc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kvisc</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14492,9 +14473,16 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Возвращает результат расчёта с относительными значениями теплоёмкостей потоков, тепловых мощностей</span>
-<span class="c1">#и коэффициента теплопередачи</span>
-<span class="n">he</span><span class="o">.</span><span class="n">get_res</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">enter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span> <span class="c1"># вход в трубопровод</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>  <span class="c1"># труба DN80</span>
+<span class="n">elbow</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>  <span class="c1"># отвод 90 градусов</span>
+<span class="n">elbow45</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;deg&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>  <span class="c1"># отвод 45 градусов</span>
+<span class="n">valve</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">}</span> <span class="c1"># задвижка фланцевая</span>
+<span class="n">pipe40</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">D_p</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">}</span>  <span class="c1"># труба DN40</span>
+<span class="n">exit</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">D_p</span><span class="p">}</span> <span class="c1">#потери с выходной скоростью</span>
+<span class="n">elems</span> <span class="o">=</span> <span class="p">[</span><span class="n">enter</span><span class="p">,</span> <span class="n">pipe</span><span class="p">,</span> <span class="n">elbow</span><span class="p">,</span> <span class="n">elbow45</span><span class="p">,</span> <span class="n">valve</span><span class="p">,</span> <span class="n">pipe40</span><span class="p">,</span> <span class="n">exit</span><span class="p">]</span>
+<span class="n">dHs</span> <span class="o">=</span> <span class="n">ppln_calc_dH</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">elems</span><span class="p">,</span> <span class="o">**</span><span class="n">defs</span><span class="p">)</span>
+<span class="n">dHs</span>  <span class="c1"># потери давления на каждом участке</span>
 </pre></div>
 
      </div>
@@ -14516,17 +14504,13 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;t_hot_in&#39;: 70.0,
- &#39;t_hot_out&#39;: 55.3,
- &#39;t_cold_in&#39;: 45.0,
- &#39;t_cold_out&#39;: 56.03546293321047,
- &#39;C_hot&#39;: 1.0,
- &#39;C_cold&#39;: 0.36246780259202677,
- &#39;Q_cold&#39;: 1.0,
- &#39;Q_hot&#39;: 1.0,
- &#39;dt&#39;: 12.039461627339785,
- &#39;eff&#39;: 0.97,
- &#39;kF&#39;: 0.6149903952396416}</pre>
+<pre>[0.007053085674501933,
+ 0.02948566819409823,
+ 0.0263979868482122,
+ 0.007729500539364892,
+ 0.0007053085674501934,
+ 0.0540900501356391,
+ 0.24912918035832818]</pre>
 </div>
 
 </div>
@@ -14535,23 +14519,14 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 
 </div>
 
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Предположим, мы хотим, чтобы при неизменной тепловой мощности маслоохладителя охлаждающая вода нагревалась в маслоохладителе на 6.5 градусов.</p>
-
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">he</span><span class="o">.</span><span class="n">get_inp_params</span><span class="p">()</span>
-<span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">45</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_in&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">6.5</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;C_cold&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_hot_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_hot_out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">he</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="n">he</span><span class="o">.</span><span class="n">get_res</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dH</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dHs</span><span class="p">)</span>  <span class="c1"># суммарное значение потерь давления, м</span>
+<span class="n">dH</span>
 </pre></div>
 
      </div>
@@ -14573,17 +14548,7 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;t_hot_in&#39;: 65.3648841823823,
- &#39;t_hot_out&#39;: 50.664884182382295,
- &#39;t_cold_in&#39;: 45.0,
- &#39;t_cold_out&#39;: 51.5,
- &#39;C_hot&#39;: 1.0,
- &#39;C_cold&#39;: 0.6153846153846154,
- &#39;Q_cold&#39;: 1.0,
- &#39;Q_hot&#39;: 1.0,
- &#39;dt&#39;: 9.161265211360474,
- &#39;eff&#39;: 0.97,
- &#39;kF&#39;: 0.8082020434774805}</pre>
+<pre>0.37459078031759474</pre>
 </div>
 
 </div>
@@ -14595,8 +14560,7 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Если количество искомых параметров задано больше необходимого для нахождения единственного возможного решения, то будет выдано первое найденное (из бесконечного множества) решение.</p>
-
+<h3 id="&#1056;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1079;&#1072;&#1087;&#1072;&#1089;&#1072;">&#1056;&#1072;&#1089;&#1095;&#1105;&#1090; &#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086; &#1079;&#1072;&#1087;&#1072;&#1089;&#1072;<a class="anchor-link" href="#&#1056;&#1072;&#1089;&#1095;&#1105;&#1090;-&#1082;&#1072;&#1074;&#1080;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1079;&#1072;&#1087;&#1072;&#1089;&#1072;">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14604,68 +14568,7 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">he</span><span class="o">.</span><span class="n">get_inp_params</span><span class="p">()</span>
-<span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;C_cold&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_hot_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_hot_out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">he</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="n">he</span><span class="o">.</span><span class="n">get_res</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;t_hot_in&#39;: 70.0,
- &#39;t_hot_out&#39;: 55.3,
- &#39;t_cold_in&#39;: 52.0,
- &#39;t_cold_out&#39;: 56.0,
- &#39;C_hot&#39;: 1.0,
- &#39;C_cold&#39;: 1.0,
- &#39;Q_cold&#39;: 1.0,
- &#39;Q_hot&#39;: 1.0,
- &#39;dt&#39;: 7.404153264656804,
- &#39;eff&#39;: 0.97,
- &#39;kF&#39;: 1.0}</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Если количество искомых параметров задано меньше необходимого (введены избыточные ограничения), то будет выдана ошибка.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">he</span><span class="o">.</span><span class="n">get_inp_params</span><span class="p">()</span>
-<span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">45</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_cold_in&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">6.5</span><span class="p">;</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;C_cold&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">params</span><span class="p">[</span><span class="s1">&#39;t_hot_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">;</span> <span class="c1">#params[&#39;t_hot_out&#39;] = None</span>
-<span class="n">he</span><span class="o">.</span><span class="n">calc</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="n">he</span><span class="o">.</span><span class="n">get_res</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">calc_NPSH</span><span class="p">)</span>  <span class="c1"># описание функции calc_NPSH</span>
 </pre></div>
 
      </div>
@@ -14684,24 +14587,24 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-10-66d168af7968&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> params<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;t_cold_in&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">45</span><span class="ansi-blue-fg">;</span> params<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;t_cold_out&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> params<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;t_cold_in&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+</span> <span class="ansi-cyan-fg">6.5</span><span class="ansi-blue-fg">;</span> params<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;C_cold&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> params<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;t_hot_in&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">;</span> <span class="ansi-red-fg">#params[&#39;t_hot_out&#39;] = None</span>
-<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>he<span class="ansi-blue-fg">.</span>calc<span class="ansi-blue-fg">(</span>params<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> he<span class="ansi-blue-fg">.</span>get_res<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Help on function calc_NPSH in module npsh:
 
-<span class="ansi-green-fg">~/dzen/0025_Теплообменник/heatexchanger.py</span> in <span class="ansi-cyan-fg">calc</span><span class="ansi-blue-fg">(self, params)</span>
-<span class="ansi-green-intense-fg ansi-bold">    130</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>res
-<span class="ansi-green-intense-fg ansi-bold">    131</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 132</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Решение не найдено. Скорее всего задано слишком мало искомых параметров.&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    133</span> 
-<span class="ansi-green-intense-fg ansi-bold">    134</span>     <span class="ansi-green-fg">def</span> get_inp_params<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> des<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+calc_NPSH(z_s, z_p, t, p=101325, Q=0, D=0, dH=0)
+    Расчёт имеющегося надкавитационного напора NPSHA (кавитационного запаса)
+    z_s: высотная отметка поверхности воды, м
+    z_p: высотная отметка оси входного патрубка насоса, м
+    t: температура воды, С
+    p: давление над поверхностью воды, Па. По умолчанию 101325 Па.
+    Q: объёмный расход, м3/ч. По умолчанию 0 
+    (при расчёте NPSH скорость потока не учитывается)
+    D: внутренний диаметр входного патрубка насоса, м. По умолчанию 0
+    (при расчёте NPSH скорость потока не учитывается)
+    dH: потери давления во входном трубопроводе насоса, м. По умолчанию 0
+    (при расчёте NPSH потери давления не учитывается)
+    return: значение NPSH, м
 
-<span class="ansi-red-fg">ValueError</span>: Решение не найдено. Скорее всего задано слишком мало искомых параметров.</pre>
+</pre>
 </div>
 </div>
 
@@ -14709,6 +14612,100 @@ $$k = \frac{2k_п(ab)^{0.8}}{a^{0.8} + b^{0.8}}$$<p>где $k_п$ - проект
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">NPSH</span> <span class="o">=</span> <span class="n">calc_NPSH</span><span class="p">(</span><span class="n">z_s</span><span class="p">,</span> <span class="n">z_p</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">D_p</span><span class="p">,</span> <span class="n">dH</span><span class="p">)</span>  <span class="c1"># расчёт кавитационного запаса, м</span>
+<span class="n">NPSH</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4.559129372819385</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Требуемый надкавитационный напор на входе NPSHR (required NPSH) должен быть на 0,5 м меньше найденного значения NPSH:</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">NPSHR</span> <span class="o">=</span> <span class="n">NPSH</span> <span class="o">-</span> <span class="mf">0.5</span>
+<span class="n">NPSHR</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4.059129372819385</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;">&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;<a id="refs" /><a class="anchor-link" href="#&#1057;&#1089;&#1099;&#1083;&#1082;&#1080;">&#182;</a></h3><ol>
+<li><a href="https://medsv.github.io/dzen/0011/region1.html">Расчёт теплофизических свойств воды и водяного пара. Область 1 - вода.</a></li>
+<li><a href="https://medsv.github.io/dzen/0003/saturation_curve.html">Зависимость температуры насыщения водяного пара от давления и зависимость давления насыщения от температуры</a></li>
+<li><a href="https://medsv.github.io/dzen/0004/calc_ws_dvisc.html">Определение динамической вязкости воды и водяного пара</a></li>
+<li><a href="https://medsv.github.io/dzen/0026/hydrcalcpipeline.html">Гидравлический расчёт трубопровода</a></li>
+<li>ГОСТ ISO 9906-2015 Насосы динамические. Гидравлические испытания. Классы точности 1, 2 и 3</li>
+</ol>
+
+</div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
