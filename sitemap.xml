@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
-	<loc>https://medsv.github.io/index.html</loc>
+	<loc>https://medsv.github.io/dzen/index.html</loc>
 </url>
 <url>
 	<loc>https://medsv.github.io/dzen/0001/calc_dryair_dens.html</loc>
@@ -92,5 +92,11 @@
 </url>
 <url>
 	<loc>https://medsv.github.io/dzen/0025/heatexchanger.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0027/NPHS.html</loc>
+</url>
+<url>
+	<loc>dzen/0028/pump_selection.html</loc>
 </url>
 </urlset>

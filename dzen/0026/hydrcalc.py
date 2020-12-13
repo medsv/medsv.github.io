@@ -13,7 +13,7 @@ https://medsv.github.io/
 __author__ = "Сергей Медведев"
 __copyright__ = "Сергей Медведев, 2020"
 __license__ = "GPL"
-__version__ = "3.0"
+__version__ = "3.1"
 __maintainer__ = "Сергей Медведев"
 __email__ = "medsv@yandex.ru"
 __status__ = "Production"
@@ -113,7 +113,25 @@ def calc_w(Q, D):
     """
     if D > 2:  # диаметр указан в мм, поэтому будет выдана ошибка
         raise ValueError("Значение диаметра должно быть задано в метрах")
-    return Q / (pi * D * D / 4) / 3600
+    return Q / calc_F(D) / 3600
+
+
+def calc_D(Q, w):
+    """
+    Определение внутреннего диаметра по объёмному расходу и скорости
+    Q: объёмный расход, м3/ч
+    w: скорость потока, м/с
+    """
+    F = Q / 3600 / w
+    return sqrt(4 * F / pi)
+
+
+def calc_F(D):
+    """
+    Определение площади круга (сечения трубы)
+    D: диаметр сечения, м
+    """
+    return pi * D * D / 4
 
 
 def calc_Re(w, D, kvisc=1e-6):
