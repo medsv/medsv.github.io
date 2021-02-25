@@ -8,6 +8,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
+
 <style type="text/css">
     pre { line-height: 125%; margin: 0; }
 td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
@@ -14264,7 +14265,7 @@ a.anchor-link {
 <p>$H$, м - напор насоса, $\Delta H_{i,j}$, м - падение давления на участке $(i,j)$ сети, $R_{i,j}$ - гидравлическое сопротивление участка $(i,j)$ сети (подробнее про гидравлическое сопротивление см. в статье <a href="https://medsv.github.io/dzen/0015/network.html">Моделирование характеристики гидравлической сети</a>), $Q_{i,j}$, $м^3/ч$ - объёмный расход через участок $(i,j)$ сети, причём $Q_{0,j} = Q_{2,j}$.</p>
 <p>Индекс $i=0$ соответствует участкам подающего трубопровода, $i=1$ - потребители, $i=2$ - участки обратного трубопровода. Индекс $j$ - номер потребителя (от 0 до $N-1$).
 Все значения $R_{i,j}$ известны, так же известны значения расхода через каждый потребитель $Q_{1,j}$, $j = 0\ldots N-1$.</p>
-<p>В качестве примера рассмотрим сеть из трёх потребителей.
+<h2 id="&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;">&#1055;&#1088;&#1080;&#1084;&#1077;&#1088; &#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;<a class="anchor-link" href="#&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;-&#1088;&#1072;&#1089;&#1095;&#1105;&#1090;&#1072;">&#182;</a></h2><p>В качестве примера рассмотрим сеть из трёх потребителей.
 На первом этапе найдём значение напора насоса, величина которого будет достаточной для обеспечения через каждый потребитель расхода не менее требуемого.</p>
 
 </div>
@@ -14371,7 +14372,7 @@ a.anchor-link {
 <span class="c1">#dHs[1,j] - потери давления в контуре потребителя j (dHs[0,j] + потери давления в линии потребителя)</span>
 <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">tmp</span> <span class="o">+=</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">tmp</span> <span class="o">+=</span> <span class="p">(</span><span class="n">Rs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="n">dHs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
     <span class="n">dHs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dHs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">Qs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="n">dHs</span> 
