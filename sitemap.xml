@@ -94,12 +94,15 @@
 	<loc>https://medsv.github.io/dzen/0025/heatexchanger.html</loc>
 </url>
 <url>
-	<loc>https://medsv.github.io/dzen/0027/NPHS.html</loc>
+	<loc>https://medsv.github.io/dzen/0027/NPSH.html</loc>
 </url>
 <url>
-	<loc>dzen/0028/pump_selection.html</loc>
+	<loc>https://medsv.github.io/dzen/0028/pump_selection.html</loc>
 </url>
 <url>
-	<loc>dzen/0029/Расчёт_параметров_РК.html</loc>
+	<loc>https://medsv.github.io/dzen/0029/Расчёт_параметров_РК.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0031/cv_pump.html</loc>
 </url>
 </urlset>
