@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Онлайн расчёт параметров влажного воздуха</title>
+<meta name="DESCRIPTION" content="Онлайн расчёт параметров влажного воздуха.">
+<meta name="Keywords" content="влажный воздух, влагосодержание, точка росы, температура влажного термометра, температура насыщения, давление насыщения, плотность, расчёт, характеристики, параметры">
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+<script><!--
+var params = ["t, °С","P, Па"]
+var paramIndex, inputValue, outputValue;
+function calculate(){
+	outputValue=0;
+	document.Saturation.outputParamValue.value="";
+	paramIndex=document.Saturation.paramSelection.selectedIndex
+	inputValue = parseFloat(document.Saturation.inputParamValue.value.replace(/,/, '.'));
+
+	if (paramIndex==0) outputValue=SaturationPressure(inputValue);
+	else outputValue=SaturationTemperature (inputValue);
+
+	document.Saturation.inputParamValue.value=inputValue ;
+	document.Saturation.outputParamValue.value=outputValue.toFixed(2);
+}
+function anotherIndex(curIndex){
+	if (curIndex == 0) return 1;
+	return 0;
+}
+function OnSelectionChange (select) {
+	var temp;
+	document.Saturation.outputParamValue.value="";
+	document.Saturation.inputParamValue.value="";
+	temp = document.Saturation.paramSelection.selectedIndex;
+	document.getElementById('lbl').innerHTML =params[anotherIndex(temp)] ;
+	if (temp==0) document.Saturation.inputParamValue.value=20;
+	else document.Saturation.inputParamValue.value=101325;
+}
+
+
+function calculate2(){
+
+	var P, t, RH, answer1=[];
+	var answer2=[];
+	P=parseFloat(document.WetBulb.inputP.value.replace(/,/, '.'));
+	if (P<0) P=101325;
+	document.WetBulb.inputP.value=P;
+	t=parseFloat(document.WetBulb.inputT.value.replace(/,/, '.'));
+	if (t>70) t=70;
+	document.WetBulb.inputT.value=t;
+	RH=parseFloat(document.WetBulb.inputRH.value.replace(/,/, '.'));
+	if (RH>100) RH=100;
+	if (RH<0) RH=0;
+	document.WetBulb.inputRH.value=RH;	
+	RH=RH/100;
+
+	answer1=wetTermometer(P, t, RH);
+	answer2=humidity(P, t, RH);
+	answer2[0]=answer2[0]*1000.0;	
+	document.WetBulb.Tw.value= answer1[0].toFixed(2);
+	document.WetBulb.Tdp.value= answer1[1].toFixed(2);
+	document.WetBulb.d.value=answer2[0].toFixed(2);	
+	document.WetBulb.ro.value=answer2[1].toFixed(3);	
+}
+//-->
+</script>
+
+<script src="js.js"></script>
+<style>
+	body{font-family: Arial, Verdana, Geneva, sans-serif;}
+	h1{font-size: 130%;}
+	h2{font-size: 105%;}
+	h3{font-size: 100%;}
+	input{font-size: 120%;
+	width: 150px;}
+	select{font-size: 120%;}
+	hr {width: 150px;
+		margin-right:100%;
+		color: lightgrey;
+		}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(70084201, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/70084201" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<!-- Если расместить Yandex.Metrika counter в head, то validator.w3.org выдаёт много ошибок и предупреждений -->
+<h1>Расчёт параметров влажного воздуха</h1>
+<p>Значения по умолчанию: t = 20&nbsp;°С, P = 101&nbsp;325 Па, относительная влажность RH = 60%.</p>
+<h2>Влагосодержание, температура влажного термометра и температура точки росы.</h2>
+
+<form name="WetBulb">
+<label>Атмосферное давление, Па</label><br><input name="inputP" value="101325" pattern="[0-9]+([,\.][0-9]+)?" title="Введите число. В качестве десятичного разделителя можно использовать как точку, так и запятую."><br>
+<label>Температура окружающей среды,  °С</label><br><input name="inputT" value="20" pattern="[0-9]+([,\.][0-9]+)?" title="Введите число. В качестве десятичного разделителя можно использовать как точку, так и запятую."><br>
+<label>Относительная влажность, %</label><br><input name="inputRH" value="60" pattern="[0-9]+([,\.][0-9]+)?" title="Введите число. В качестве десятичного разделителя можно использовать как точку, так и запятую."> <br><br>
+<input value="Расчёт" onclick="calculate2()" type="button"><br><br>
+
+<label>Температура влажного термометра, °С</label><br><input name="Tw" value="" readonly="readonly"><br> 
+<label>Температура точки росы, °С</label><br><input name="Tdp" value="" readonly="readonly"><br> 
+<label>Влагосодержание, г на кг сухого воздуха</label><br><input name="d" value="" readonly="readonly"><br> 
+<label>Плотность влажного воздуха, кг/м3</label><br><input name="ro" value="" readonly="readonly"><br> 
+</form>
+
+
+<h2>Максимальная упругость водяного пара от температуры P=f(t), температура насыщенного пара от давления t=f(P).</h2>
+
+<form name="Saturation">
+<input name="inputParamValue" value="20" pattern="[0-9]+([,\.][0-9]+)?" title="Введите число. В качестве десятичного разделителя можно использовать как точку, так и запятую.">
+<select name="paramSelection" onchange="OnSelectionChange (this)">
+</select>
+<br><br>
+<input value="Расчёт" onclick="calculate()" type="button"><br><br>
+<input name="outputParamValue" readonly="readonly"> <label id="lbl">P, Па</label>
+<script><!--
+	document.getElementById('lbl').innerHTML =params[1];
+    //-->
+</script>
+<br><br>
+<script><!--
+
+    for(i=0; i<params.length; i++)
+    {   
+        document.Saturation.paramSelection.options[i] = new Option(params [i], i, false, false);
+    }
+    
+    document.Saturation.paramSelection.selectedIndex = 0;
+    //-->
+</script>
+</form>
+<h2>Методика расчёта</h2>
+<p>Значения температуры и давления насыщения пара вычисляются по формулам <a href="http://twt.mpei.ac.ru/mcs/worksheets/iapws/IAPWS-IF97-Region4.xmcd" target="_blank">IAPWS-IF 97</a>.</p>
+<p>Температура точки росы соответствует температуре насыщения пара при давлении [относительная влажность]*[давление насыщения пара при температуре окружающей среды].</p>
+<p>Плотность влажного воздуха ro_wa = ro_da+ro_v, где ro_da - плотность сухого воздуха, ro_v - плотность пара;<br>
+ro_v = P_v/(t+273,15)/R_v, где P_v - парциальное давление пара, t - температура окружающей среды (в градусах Цельсия), R_v = 461,495 Дж/кг/К - газовая постоянная пара;<br>
+P_v = P_vsat * RH, где P_vsat - давление насыщения пара при температуре окружающей среды t, RH - относительная влажность воздуха;<br> 
+ro_da = P_da/(t+273,15)/R_da, где P_da - парциальное давление сухого воздуха, R_da=287,058 Дж/кг/К - газовая постоянная сухого воздуха;<br>
+P_da = P - P_v, где P - атмосферное давление.<br>
+Влагосодержание воздуха в г/(кг сухого воздуха) d = ro_v/ro_da*1000.
+</p> 
+<h3>Температура влажного термометра</h3>
+<p>Имеется контактирующая с воздухом водная поверхность. Температура воздуха вдали от водной поверхности выше температуры воды. Нижний слой воздуха начинает отдавать теплоту верхнему слою воды которая идёт на нагрев воды и на парообразование. При отдаче теплоты воде температура и энтальпия воздуха уменьшаются, при поступлении в воздух пара энтальпия воздуха увеличивается на теплоту скрытого парообразования при неизменной температуре воздуха. Так же становится больше и относительная влажность воздуха. После установления динамического равновесия нижний слой воздуха и верхний слой воды имеют температуру, величина которой соответствует температуре влажного термометра. При этом относительная влажность нижнего слоя воздуха будет равна 100%.</p>
+<p>В установившемся динамическом равновесии вся передаваемая поступающим к водной поверхности воздухом теплота идёт на парообразование, т.е. воздух отдаёт явное тепло, что приводит к понижению его температуры, а от воды (в максимальной степени насыщаясь паром) получает тепло в том же объёме в виде скрытой теплоты парообразования. Таким образом, значение энтальпии воздуха вдали от поверхности воды и воздуха вместе с испарившемся паром около поверхности воды оказывается одинаковым.
+<p>Т.к. вода испаряется, то количество влажного воздуха становится больше, а количество воды меньше, и фактически вода не передаёт воздуху теплоту равную теплоте скрытого парообразования, а переносит её в воздух вместе с собой, увеличивая влажность воздуха.</p>
+<p>При установившемся динамическом равновесии выраженные в Дж/кг значения энтальпий воздуха у поверхности воды и вдали от поверхности будут отличаться. Равными будут значения энтальпий, выраженные в Дж/(кг сухого воздуха).</p>
+<p>Для определения значения влажного термометра сначала нужно найти h - значение энтальпии на кг сухого воздуха при заданных параметрах окружающей среды (атмосферное давление, температура сухого термометра, относительная влажность). Температура влажного термометра t_w – это температура, при которой воздух с относительной влажностью 100% будет иметь значение h. </p>
+<p><a href="https://www.engineeringtoolbox.com/enthalpy-moist-air-d_683.html" target="_blank">Формула</a> для определения энтальпии воздуха в кДж/(кг сухого воздуха): h =  (1,006 кДж/кг/C) t + d [(1,84 кДж/кг/C) t + (2501 кДж/кг)], где 1,006 кДж/кг/C - теплоёмкость сухого воздуха, 1,84 кДж/кг/C - теплоёмкость пара, 2501 кДж/кг - скрытая теплота парообразования.<br>
+Первое приближение значения влажного термометра можно притять t_w=0,75*t. Для t_w находим h_w, если h_w больше h, то значение t_w нужно уменьшить, если меньше - увеличить. Продолжаем подбор t_w до того момента как h_w приблизется к h с заданной точностью.</p>
+<p>Точность расчёта значения температуры влажного термометра в данном случае зависит от точности использованной формулы расчёта значения энтальпии влажного воздуха на кг сухого воздуха.</p>
+<hr />
+<p><a href="https://zen.yandex.ru/id/5f33dcd5554adc5b33aaee83">Инженерные расчёты на Python</a>, С.В. Медведев, 2020-2021<br>
+<a href="../index.html">Использование Python и Jupyter Notebook для инженерных расчётов</a>, С.В. Медведев, 2020-2021
+</p>
+</body></html>
