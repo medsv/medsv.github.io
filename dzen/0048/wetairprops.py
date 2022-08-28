@@ -242,7 +242,7 @@ def calc_dens(t, RH, p=101325):
     p_s = calc_p_s (t)
     p_st = RH * p_s
     p_da = p - p_st
-    dens = (mu_st * p_st + mu_da * p_da) / R / (t + 273.15)
+    dens = (mu_st * p_st + mu_da * p_da) / R / (t + 273.15) / 1000.
     return dens
     
 def calc_dens_d(t, d, p=101325):
