@@ -7,6 +7,12 @@
 	<loc>https://medsv.github.io/dzen/index.html</loc>
 </url>
 <url>
+	<loc>https://medsv.github.io/modules.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/guide.html</loc>
+</url>
+<url>
 	<loc>https://medsv.github.io/dzen/0001/calc_dryair_dens.html</loc>
 </url>
 <url>
@@ -185,5 +191,8 @@
 </url>
 <url>
 	<loc>https://medsv.github.io/dzen/0058/КПД_дросселирования.html</loc>
+</url>
+<url>
+	<loc>https://medsv.github.io/dzen/0059/ВКВН-2.html</loc>
 </url>
 </urlset>
