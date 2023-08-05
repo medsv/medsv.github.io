@@ -24,18 +24,24 @@ function  SaturationTemperature(P){
 }
 
 function enthalpy(t,d){
-	return 1.006*t+d*(1.84*t+2501);
+	return 1.006*t+d*(1.84*t+2501)/ 1000;
 }
 
-function humidity (P, t, RH){
-	var Psat, P_v, P_da, ro_v, ro_da, d;
-	Psat=SaturationPressure(t);
-	P_v=RH*Psat; 
-	ro_v=P_v/461.495/(t+273.15);
-	P_da=P-P_v;
-	ro_da=P_da/287.058/(t+273.15);
-	d=ro_v/ro_da;
-	var ro_wd=ro_v+ro_da;
+function humidity (p, t, RH){
+	var p_s, p_st, p_da, ro_v, ro_wd, d;
+    var mu_st = 18.;  // Молярная масса водяного пара, г/моль
+    var mu_da = 29.;  // Молярная масса сухого воздуха, г/моль
+    var R = 8.314  // Универсальная газовая постоянная, Дж/(моль*К) 
+	p_s=SaturationPressure(t);
+	p_st=RH*p_s; 
+//	ro_v=P_v/461.495/(t+273.15);
+    p_da=p-p_st;
+//	ro_da=P_da/287.058/(t+273.15);
+//	d=ro_v/ro_da;
+//	var ro_wd=ro_v+ro_da;
+    d = 1000 * p_st / (p - p_st) * mu_st / mu_da;
+    ro_wd = (mu_st * p_st + mu_da * p_da) / R / (t + 273.15) / 1000.;
+    
 	return [d, ro_wd];
 }
 
