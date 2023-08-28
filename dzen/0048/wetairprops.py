@@ -17,7 +17,7 @@ https://files.stroyinf.ru/Data1/44/44694/
 __author__ = "Сергей Медведев"
 __copyright__ = "Сергей Медведев, 2023"
 __license__ = "GPL"
-__version__ = "2.2.4"
+__version__ = "2.2.5"
 __maintainer__ = "Сергей Медведев"
 __email__ = "medsv@yandex.ru"
 __status__ = "Production"
@@ -60,6 +60,13 @@ calc_p_cond, calc_p_cond_t_dp
 Исправлена ошибка определения допустимого значения входного параметра в
 calc_p_s, calc_t_s
 в calc_p_st добавлена __check_RH(RH)
+
+Отличие версии 2.2.5 от 2.2.4
+В функции calc_t_wb
+b = t
+поменял на
+b = min(t, calc_t_s(p))
+что позволит определять температуру мокрого термометра при t > 100 C
 """
 
 
@@ -93,8 +100,7 @@ def calc_t_wb(t, RH, p = p_0, RH_target = 1.):
         return t  # иначе root_scalar будет делать много итераций при поиске решения
     a = t_min  # нижняя граница диапазона поиска t_wb (ограничение методики расчёта)
     I_t = __calc_I(t, RH, p)
-    
-    b = t  # верхняя граница диапазона поиска t_wb
+    b = min(t, calc_t_s(p))  # верхняя граница диапазона поиска t_wb
     I_test = __calc_I(a, 1., p)
     if I_test > I_t:
         raise ValueError('Недопустимые значения пары параметров t и RH. ' +
@@ -255,7 +261,7 @@ def calc_d(t, RH, p = p_0):
 
 def __calc_d(t, RH, p):
     p_st = calc_p_st(t, RH)
-    if p_st > p: 
+    if p_st > p:
         raise ValueError("Парциальное давление пара выше давления влажного воздуха" 
         " - это не влажный воздух, а паровоздушная смесь")
     d = 1000 * p_st / (p - p_st) * mu_st / mu_da
