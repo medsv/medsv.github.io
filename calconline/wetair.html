@@ -57,7 +57,7 @@ function calculate2(){
     //Энтальпия, кДж/(кг сухого воздуха)
 	answer3=enthalpy(t,answer2[0]);
     //Энтальпия, кДж/(кг влажного воздуха)
-	answer4=answer3/(1+answer2[0]);
+	answer4=answer3/(1+answer2[0] / 1000);
     
     //Парциальное давление пара, Па
 	answer5=RH*SaturationPressure(t);
