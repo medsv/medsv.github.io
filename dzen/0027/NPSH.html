@@ -23,7 +23,12 @@
 <script>window.yaContextCb=window.yaContextCb||[]</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
 
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+
+
 
 
 <style type="text/css">
@@ -54,6 +59,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .highlight .m { color: var(--jp-mirror-editor-number-color) } /* Literal.Number */
 .highlight .s { color: var(--jp-mirror-editor-string-color) } /* Literal.String */
 .highlight .ow { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator.Word */
+.highlight .pm { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation.Marker */
 .highlight .w { color: var(--jp-mirror-editor-variable-color) } /* Text.Whitespace */
 .highlight .mb { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Bin */
 .highlight .mf { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Float */
@@ -14577,12 +14583,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
                 },
                 displayAlign: 'center',
                 CommonHTML: {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 }
             });
-        
+
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -14609,20 +14615,30 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><b>Кавита́ция</b> (от лат. cavitas — пустота) — физический процесс образования пузырьков (пустот) в жидких средах, с последующим их схлопыванием и высвобождением большого количества энергии, которое сопровождается шумом и гидравлическими ударами.</p>
-<p>В насосах кавитация возникает в результате местного понижения давления жидкости до давления кипения, в результате чего часть жидкости переходит из жидкой фазы в газообразную, и в потоке жидкости образуются пузырьки газа. Попадая в зону с более высоким давлением (выше давления кипения при текущей температуре), пузырьки газа схлопываются (газ конденсируется).</p>
-<p>Давление с одной стороны может абсолютным и избыточным, с другой - полным, статическим и динамическим.</p>
-<p>Абсолютное давление – это давление относительно вакуума, оно измеряется барометром. Нормальное атмосферное давление 101325 Па – это абсолютное давление.</p>
-<p>Избыточное давление – это разница между измеряемым абсолютным давлением и атмосферным давлением, измеряется манометром.</p>
-<p>В данной статье используются абсолютные величины давления.</p>
-<p>Полное, статическое и динамическое давления связаны зависимостью:</p>
+<p>В насосах кавитация возникает в результате местного понижения давления жидкости до давления кипения при температуре жидкости, в результате чего часть жидкости переходит из жидкой фазы в газообразную, и в потоке жидкости образуются пузырьки газа. Попадая в зону с более высоким давлением (выше давления кипения при текущей температуре), пузырьки газа схлопываются (газ конденсируется).</p>
+<p>Давление с одной стороны может абсолютным и избыточным, с другой - полным, статическим и динамическим.<br>
+Абсолютное давление – это давление относительно вакуума, оно измеряется барометром. Нормальное атмосферное давление 101325 Па – это абсолютное давление.<br>
+Избыточное давление – это разница между измеряемым абсолютным давлением и атмосферным давлением, измеряется манометром.
+В данной статье используются абсолютные величины давления.<br>
+Полное, статическое и динамическое давления связаны зависимостью:</p>
+<!-- Yandex.RTB R-A-2658460-2 -->
+<div id="yandex_rtb_R-A-2658460-2"></div>
+<script>
+window.yaContextCb.push(()=>{
+	Ya.Context.AdvManager.render({
+		"blockId": "R-A-2658460-2",
+		"renderTo": "yandex_rtb_R-A-2658460-2"
+	})
+})
+</script>
 $$\bar{p} = p + \frac{\rho w^2}{2}\quad (1)$$<p>где $\bar{p}$ - полное давление, Па; $p$ - статическое давление, Па; $\rho w^2/2$ -динамическое давление, Па; $\rho$ - плотность жидкости, $кг/м^3$; $w$ - скорость жидкости, м/с.</p>
-<p>Надкавитационный напор (кавитационный запас) обычно задаётся в метрах столба жидкости (м).</p>
-<p>Перевод давления из Па в м: 
+<p>Надкавитационный напор (кавитационный запас) обычно задаётся в метрах столба жидкости (м).
+Перевод давления из Па в метры столба жидкости (м): 
 $$H = \frac{p}{\rho g} $$
 где $H$ - давление в метрах столба жидкости; $p$ - давление в Па; $\rho$ - плотность жидкости, $кг/м^3$; $g\approx$9,81 $м/с^2$ - ускорение свободного падения.</p>
 <p>В метрах столба жидкости (м) выражение (1) выглядет следующим образом:</p>
-$$\bar{H} = H + \frac{w^2}{2g}\quad$$<p>где $\bar{H}$ - полное давление, м; $H$ - статическое давление, м; $ w^2/(2g)$ -динамическое давление, м.</p>
-<p>Когда мы говорим о давлении, при котором закипает жидкость, имеется в виду статическое давление.</p>
+$$\bar{H} = H + \frac{w^2}{2g}\quad$$<p>где $\bar{H}$ - полное давление, м; $H$ - статическое давление, м; $ w^2/(2g)$ -динамическое давление, м.
+Когда мы говорим о давлении, при котором закипает жидкость, имеется в виду статическое давление.</p>
 
 </div>
 </div>
@@ -14637,18 +14653,8 @@ $$\bar{H} = H + \frac{w^2}{2g}\quad$$<p>где $\bar{H}$ - полное давл
 <p><b>Надкавитационный напор</b> на входе (кавитационный запас), NPSH (net positive suction head) - полное абсолютное давление жидкости в сечении входного патрубка насоса за вычетом давления кипения жидкости при данной температуре жидкости.</p>
 <p>Располагаемый (available) надкавитационный напор NPSHA находится по формуле:</p>
 $$\mathrm{NPSHA} = \bar{H}_{вх} - H_{кип} \quad (2)$$<p>где $\bar{H}_{вх}$ - полное абсолютное давление жидкости в сечении фланца всасывающего патрубка насоса (на входе в насос), $H_{кип}$ - давление кипения жидкости (м) при температуре равной температуре жидкости $t$.</p>
-<!-- Yandex.RTB R-A-2658460-2 -->
-<div id="yandex_rtb_R-A-2658460-2"></div>
-<script>
-window.yaContextCb.push(()=>{
-	Ya.Context.AdvManager.render({
-		"blockId": "R-A-2658460-2",
-		"renderTo": "yandex_rtb_R-A-2658460-2"
-	})
-})
-</script>
 <p>Развернув $\bar{H}_{вх}$, получим следующее выражение:</p>
-$$\mathrm{NPSHA} = H_{внеш} + (z_ж - z_{вх}) - \Delta H + \frac{w^2}{2g} - H_{кип} \quad (3)$$<p>где $H_{внеш}$ - давление над поверхностью жидкости в исходном баке (для открытой системы - атмосферное давление $H_{атм}$), м; $(z_ж - z_{вх})$ - давление (подпор) столба жидкости, м; $z_ж$ - отметка поверхности жидкости относительно произвольно выбранной плоскости отсчёта $Z_0$, м; $z_{вх}$ - отметка оси входного патрубка, м; $\Delta H$ - потери давления (напора) при движении жидкости объёмным расходом $Q$ ($м^3/ч$) во входном трубопроводе, м.</p>
+$$\mathrm{NPSHA} = H_{внеш} + (z_ж - z_{вх}) - \Delta H + \frac{w^2}{2g} - H_{кип} \quad (3)$$<p>где $H_{внеш}$ - давление над поверхностью жидкости в исходном баке (для открытой системы - атмосферное давление $H_{атм}$), м; $(z_ж - z_{вх})$ - давление (подпор) столба жидкости, м; $z_ж$ - отметка поверхности жидкости относительно произвольно выбранной плоскости отсчёта $Z_0$, м; $z_{вх}$ - отметка оси входного патрубка, м; $\Delta H$ - потери давления (напора) при движении жидкости объёмным расходом $Q$ ($м^3/ч$) в подводящем трубопроводе, м.</p>
 <p><img src="0027_Scheme.png"  alt="Расчётная схема" width="500" align = "center"></img></p>
 
 </div>
@@ -14666,17 +14672,30 @@ $$\mathrm{NPSHA} = H_{внеш} + (z_ж - z_{вх}) - \Delta H + \frac{w^2}{2g} 
 <p>Условие бескавитационной работы насоса: $\mathrm{NPSHR} &lt; (\mathrm{NPSHA} - 0.5\ м)$, где $0.5\ м$ - запас.</p>
 <p>Из выражения (2) следует, что при прочих равных условиях чем ниже $H_{кип}$ (зависящая от температуры жидкости $t$), тем выше $\mathrm{NPSHA}$.</p>
 <p>Запишем выражение (3) в следующем виде:</p>
-$$\mathrm{NPSHA} = \mathrm{NPSHA}_t + (z_ж - z_{вх}) - \Delta H + \frac{w^2}{2g} \quad (4)$$<p>где $\mathrm{NPSHA}_t = H_{внеш}-H_{кип}$ - располагаемый надкавитационный напор, обеспеченный разностью между температурой кипения жидкости при давлении $H_{внеш}$ и текущей температурой жидкости $t$. Назовём данную величину располагаемым температурным надкавитационным напором.</p>
-<p>Для открытой системы ($H_{внеш}=H_{атм}$) зависимость $\mathrm{NPSHA}_t$ от температуры воды выглядит следующим образом.</p>
+$$\mathrm{NPSHA} = \mathrm{NPSHA}_t + (z_ж - z_{вх}) - \Delta H + \frac{w^2}{2g} \quad (4)$$<p>где $\mathrm{NPSHA}_t = H_{внеш}-H_{кип}$ - располагаемый температурный надкавитационным напор, разность между внешним давлением и давлением, при котором закипает жидкость температурой $t$.</p>
+<p>Для открытой системы внешним давлением является атмосферное давление ($H_{внеш}=H_{атм}$) и зависимость $\mathrm{NPSHA}_t$ от температуры воды выглядит следующим образом.</p>
 <p><img src="0027_NPSHAt.png"  alt="Располагаемый температурный надкавитационный напор" width="700" align = "center"></img></p>
-<p>Из данного графика видно, что при $\mathrm{NPSHR} = 5$ м и температуре воды $20\ ^{\circ} C$ насос не только не требует подпора, но он будет работать без кавитации при заборе воды с уровня не ниже 5 м от оси всаса насоса (при условии $\Delta H = 0$ м).</p>
+<p>Из данного графика видно, что при $\mathrm{NPSHR} = 5$ м и температуре воды $20\ ^{\circ} C$ насос не только не требует подпора, но он будет работать без кавитации при заборе воды с уровня не ниже 5 м от оси всаса насоса (потери давления в подводящем трубопроводе не учитываются $\Delta H = 0$ м).</p>
 <p>$\mathrm{NPSHR}$ зависит от расхода через насос (подачи насоса). При неизменной величине полного давления перед насосом увеличение расхода означает увеличение скорости потока, а значит уменьшения статического давления.</p>
 $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает при снижении статического давления в потоке до давления кипения при температуре равной температуре воды. При увеличении подачи и уменьшении статического давления снижается температура кипения воды, т.е. вода закипает при более низкой температуре, поэтому для недопущения кавитации при увеличении подачи $\mathrm{NPSHR}$ так же должен увеличиваться.</p>
+<p>Также нужно помнить, что потери давления в трубопроводе пропорциональны квадрату скорости жидкости в нём, поэтому при увеличении подачи насоса в 2 раза потери полного давления в подводящем трубопроводе увеличатся в 4 раза.</p>
 
 </div>
 </div>
 </div>
 </div>
+
+<!-- Yandex.RTB R-A-2658460-3 -->
+<div id="yandex_rtb_R-A-2658460-3"></div>
+<script>
+window.yaContextCb.push(()=>{
+	Ya.Context.AdvManager.render({
+		"blockId": "R-A-2658460-3",
+		"renderTo": "yandex_rtb_R-A-2658460-3"
+	})
+})
+</script>
+
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14691,6 +14710,7 @@ $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает п
 <li>Расчёт потерь давления при движении жидкости в трубопроводе  <a href="#refs">[4]</a>.</li>
 </ol>
 <p>Все необходимые для расчёта кавитационного запаса модули на Python собраны в один архив (<a href="https://medsv.github.io/dzen/0027/NPSH.zip">скачать</a>).</p>
+<p><b>Разработана методика оценки располагаемого кавитационного запаса без необходимости проведения сложных расчётов (см. <a href="#refs">[5]</a>)</b>.</p>
 
 </div>
 </div>
@@ -14740,7 +14760,7 @@ $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает п
 <span class="n">z_s</span> <span class="o">=</span> <span class="mf">.6</span>  <span class="c1"># высотная отметка поверхности воды в баке (минимальный уровень), м</span>
 <span class="n">z_p</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.33</span>  <span class="c1"># высотная отметка оси входного патрубка насоса, м</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="mf">10.</span>  <span class="c1"># объёмный расход, м3/ч</span>
-<span class="n">D</span> <span class="o">=</span> <span class="mf">0.082</span>  <span class="c1"># внутренний диаметр входного трубопровода, м</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.082</span>  <span class="c1"># внутренний диаметр подводящего трубопровода, м</span>
 <span class="n">D_p</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># внутренний диаметр входного патрубка насоса, м</span>
 </pre></div>
 
@@ -14758,7 +14778,7 @@ $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает п
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">r1</span> <span class="o">=</span> <span class="n">Region1</span><span class="p">()</span>
-<span class="n">dens</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">r1</span><span class="o">.</span><span class="n">props_tp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">p</span><span class="p">)[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>  <span class="c1"># плотность воды, кг/м3 (см. [1])</span>
+<span class="n">dens</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">r1</span><span class="o">.</span><span class="n">props_tp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">p</span><span class="p">)[</span><span class="s1">'v'</span><span class="p">]</span>  <span class="c1"># плотность воды, кг/м3 (см. [1])</span>
 <span class="n">dens</span>
 </pre></div>
 
@@ -14802,7 +14822,7 @@ $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает п
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dvisc</span> <span class="o">=</span> <span class="n">calc_ws_dvisc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dens</span><span class="p">)</span>  <span class="c1"># динамическая вязкость воды, Па*с (см. [3])</span>
 <span class="n">kvisc</span> <span class="o">=</span> <span class="n">dvisc</span> <span class="o">/</span> <span class="n">dens</span>  <span class="c1"># кинематическая вязкость воды, м2/с</span>
-<span class="n">kvisc</span>  <span class="c1"># кинематическая вязкость потребуется при расчёте потерь давления во входном трубопроводе</span>
+<span class="n">kvisc</span>  <span class="c1"># кинематическая вязкость потребуется при расчёте потерь давления в подводящем трубопроводе</span>
 </pre></div>
 
      </div>
@@ -14842,7 +14862,7 @@ $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает п
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="%D0%A0%D0%B0%D1%81%D1%87%D1%91%D1%82-%D0%BF%D0%BE%D1%82%D0%B5%D1%80%D1%8C-%D0%B4%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D0%BE-%D0%B2%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D0%BC-%D1%82%D1%80%D1%83%D0%B1%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%B5">&#1056;&#1072;&#1089;&#1095;&#1105;&#1090; &#1087;&#1086;&#1090;&#1077;&#1088;&#1100; &#1076;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1074;&#1086; &#1074;&#1093;&#1086;&#1076;&#1085;&#1086;&#1084; &#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1077;<a class="anchor-link" href="#%D0%A0%D0%B0%D1%81%D1%87%D1%91%D1%82-%D0%BF%D0%BE%D1%82%D0%B5%D1%80%D1%8C-%D0%B4%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D0%BE-%D0%B2%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D0%BC-%D1%82%D1%80%D1%83%D0%B1%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%B5">&#182;</a></h3><p>Подробно методика расчёта потерь давления во входном трубопроводе описана в <a href="#refs">[4]</a>.</p>
+<h3 id="%D0%A0%D0%B0%D1%81%D1%87%D1%91%D1%82-%D0%BF%D0%BE%D1%82%D0%B5%D1%80%D1%8C-%D0%B4%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D0%BF%D0%BE%D0%B4%D0%B2%D0%BE%D0%B4%D1%8F%D1%89%D0%B5%D0%BC-%D1%82%D1%80%D1%83%D0%B1%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%B5">&#1056;&#1072;&#1089;&#1095;&#1105;&#1090; &#1087;&#1086;&#1090;&#1077;&#1088;&#1100; &#1076;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1074; &#1087;&#1086;&#1076;&#1074;&#1086;&#1076;&#1103;&#1097;&#1077;&#1084; &#1090;&#1088;&#1091;&#1073;&#1086;&#1087;&#1088;&#1086;&#1074;&#1086;&#1076;&#1077;<a class="anchor-link" href="#%D0%A0%D0%B0%D1%81%D1%87%D1%91%D1%82-%D0%BF%D0%BE%D1%82%D0%B5%D1%80%D1%8C-%D0%B4%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D0%BF%D0%BE%D0%B4%D0%B2%D0%BE%D0%B4%D1%8F%D1%89%D0%B5%D0%BC-%D1%82%D1%80%D1%83%D0%B1%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%B5">&#182;</a></h3><p>Подробно методика расчёта потерь давления в подводящем трубопроводе описана в <a href="#refs">[4]</a>.</p>
 
 </div>
 </div>
@@ -14897,7 +14917,7 @@ $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает п
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">defs</span><span class="p">[</span><span class="s1">&#39;Delta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.3e-3</span><span class="p">;</span> <span class="n">defs</span><span class="p">[</span><span class="s1">&#39;kvisc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kvisc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">defs</span><span class="p">[</span><span class="s1">'Delta'</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.3e-3</span><span class="p">;</span> <span class="n">defs</span><span class="p">[</span><span class="s1">'kvisc'</span><span class="p">]</span> <span class="o">=</span> <span class="n">kvisc</span>
 </pre></div>
 
      </div>
@@ -14913,13 +14933,13 @@ $$H = \bar{H} - \frac{w^2}{2g}\quad$$<p>Кавитация возникает п
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">enter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span> <span class="c1"># вход в трубопровод</span>
-<span class="n">pipe</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>  <span class="c1"># труба DN80</span>
-<span class="n">elbow</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>  <span class="c1"># отвод 90 градусов</span>
-<span class="n">elbow45</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;elbow&#39;</span><span class="p">,</span> <span class="s1">&#39;deg&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>  <span class="c1"># отвод 45 градусов</span>
-<span class="n">valve</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">}</span> <span class="c1"># задвижка фланцевая</span>
-<span class="n">pipe40</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">D_p</span><span class="p">,</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">}</span>  <span class="c1"># труба DN40</span>
-<span class="n">exit</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;lrc&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">D_p</span><span class="p">}</span> <span class="c1">#потери с выходной скоростью</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">enter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'lrc'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span> <span class="c1"># вход в трубопровод</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'pipe'</span><span class="p">,</span> <span class="s1">'qty'</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>  <span class="c1"># труба DN80</span>
+<span class="n">elbow</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'elbow'</span><span class="p">,</span> <span class="s1">'qty'</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>  <span class="c1"># отвод 90 градусов</span>
+<span class="n">elbow45</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'elbow'</span><span class="p">,</span> <span class="s1">'deg'</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s1">'qty'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>  <span class="c1"># отвод 45 градусов</span>
+<span class="n">valve</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'lrc'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">}</span> <span class="c1"># задвижка фланцевая</span>
+<span class="n">pipe40</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'pipe'</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">:</span> <span class="n">D_p</span><span class="p">,</span> <span class="s1">'qty'</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">}</span>  <span class="c1"># труба DN40</span>
+<span class="n">exit</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'lrc'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">:</span> <span class="n">D_p</span><span class="p">}</span> <span class="c1">#потери с выходной скоростью</span>
 <span class="n">elems</span> <span class="o">=</span> <span class="p">[</span><span class="n">enter</span><span class="p">,</span> <span class="n">pipe</span><span class="p">,</span> <span class="n">elbow</span><span class="p">,</span> <span class="n">elbow45</span><span class="p">,</span> <span class="n">valve</span><span class="p">,</span> <span class="n">pipe40</span><span class="p">,</span> <span class="n">exit</span><span class="p">]</span>
 <span class="n">dHs</span> <span class="o">=</span> <span class="n">ppln_calc_dH</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">elems</span><span class="p">,</span> <span class="o">**</span><span class="n">defs</span><span class="p">)</span>
 <span class="n">dHs</span>  <span class="c1"># потери давления на каждом участке</span>
@@ -15234,6 +15254,7 @@ $$\mathrm{NPSHA} = H_{внеш} + (z_ж - z_{вх}) - \Delta H' - H_{кип}$$<p
 <li><a href="https://medsv.github.io/dzen/0003/saturation_curve.html">Зависимость температуры насыщения водяного пара от давления и зависимость давления насыщения от температуры</a></li>
 <li><a href="https://medsv.github.io/dzen/0004/calc_ws_dvisc.html">Определение динамической вязкости воды и водяного пара</a></li>
 <li><a href="https://medsv.github.io/dzen/0026/hydrcalcpipeline.html">Гидравлический расчёт трубопровода</a></li>
+<li><a href="https://dzen.ru/a/YuQlMIkoykP0rEHz">Способ быстрой оценки кавитационного запаса насоса</a></li>
 <li>ГОСТ ISO 9906-2015 Насосы динамические. Гидравлические испытания. Классы точности 1, 2 и 3.</li>
 </ol>
 
@@ -15254,5 +15275,17 @@ $$\mathrm{NPSHA} = H_{внеш} + (z_ж - z_{вх}) - \Delta H' - H_{кип}$$<p
 </div>
 </div>
 </div>
+
+<!-- Yandex.RTB R-A-2658460-1 -->
+<div id="yandex_rtb_R-A-2658460-1"></div>
+<script>window.yaContextCb.push(()=>{
+	Ya.Context.AdvManager.render({
+		"blockId": "R-A-2658460-1",
+		"renderTo": "yandex_rtb_R-A-2658460-1",
+		"type": "feed"
+	})
+})
+</script>
+
 </body>
 </html>
