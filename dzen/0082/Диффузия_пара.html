@@ -7492,7 +7492,7 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<p><a href="../index.html">[Статьи]</a></p>
+<p><a href="../index.html">[Статьи]</a></p>	
 <main>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7539,10 +7539,10 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">wetairprops</span> <span class="kn">import</span> <span class="n">calc_d</span><span class="p">,</span> <span class="n">calc_RH_d</span><span class="p">,</span> <span class="n">calc_p_st_d</span><span class="p">,</span> <span class="n">calc_t_dp</span>  <span class="c1"># см. [1]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">wetairprops</span> <span class="kn">import</span> <span class="n">calc_d</span><span class="p">,</span> <span class="n">calc_RH_d</span><span class="p">,</span> <span class="n">calc_p_st_d</span><span class="p">,</span> <span class="n">calc_t_dp_d</span>  <span class="c1"># см. [1]</span>
 </pre></div>
 </div>
 </div>
@@ -7564,7 +7564,7 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">t_ст</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># температура, С</span>
@@ -7727,8 +7727,8 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Обращаю внимание, что температура точки росы, которая в ГОСТ Р ИСО 8573-1-2016 является показателем чистоты воздуха по влажности, определяется при стандартных условиях (абсолютное давление 100 000 Па = 1 бар), а не при рабочем давлении сжатого воздуха (в нашем случае 0,8 МПа).<br/>
-Температура точки росы при указанном давлении- это один из способов задать влагосодержание воздуха.</p>
+<p>Обращаю внимание, что температура точки росы, которая в ГОСТ Р ИСО 8573-1-2016 является показателем чистоты воздуха по влажности, определяется при рабочем давлении сжатого воздуха (в нашем случае 0,8 МПа).</p>
+<p>Температура точки росы при указанном давлении - это один из способов задать влагосодержание воздуха.</p>
 </div>
 </div>
 </div>
@@ -7740,7 +7740,7 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 <div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">d_сж</span> <span class="o">=</span> <span class="n">calc_d</span><span class="p">(</span><span class="n">t_тр_сж</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">p_ст</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">d_сж</span> <span class="o">=</span> <span class="n">calc_d</span><span class="p">(</span><span class="n">t_тр_сж</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">p_сж</span><span class="p">)</span>
 <span class="n">d_сж</span>  <span class="c1"># влагосодержание в сжатом воздухе с температурой точки росы минус 40 С, г водяного пара / кг сухого воздуха</span>
 </pre></div>
 </div>
@@ -7754,19 +7754,8 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>0.07973937633337363</pre>
+<pre>0.009966301725999148</pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Определим температуру точки росы сжатого воздуха при абсолютном давлении 8 бар. При охлаждении воздуха давлением 8 бар(а) ниже найденного значения, будет выпадать конденсат.</p>
 </div>
 </div>
 </div>
@@ -7776,33 +7765,6 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">t_тр_сж_8</span> <span class="o">=</span> <span class="n">calc_t_dp_d</span><span class="p">(</span><span class="n">d_сж</span><span class="p">,</span> <span class="n">p_сж</span><span class="p">)</span>
-<span class="n">t_тр_сж_8</span>  <span class="c1"># C</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>-20.050404071231306</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">p_парц_сж</span> <span class="o">=</span> <span class="n">calc_p_st_d</span><span class="p">(</span><span class="n">d_сж</span><span class="p">,</span> <span class="n">p_сж</span><span class="p">)</span>
@@ -7817,9 +7779,9 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>102.761994432845</pre>
+<pre>12.845249304105625</pre>
 </div>
 </div>
 </div>
@@ -7829,7 +7791,7 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">dp</span> <span class="o">=</span> <span class="n">p_парц_окр</span> <span class="o">-</span> <span class="n">p_парц_сж</span>
@@ -7844,9 +7806,9 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>1319.1137150271322</pre>
+<pre>1409.0304601558717</pre>
 </div>
 </div>
 </div>
@@ -7867,7 +7829,7 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">p_парц_сух</span> <span class="o">=</span> <span class="n">calc_p_st_d</span><span class="p">(</span><span class="n">d_сж</span><span class="p">,</span> <span class="n">p_окр</span><span class="p">)</span>  <span class="c1"># парциальное давление пара, Па</span>
@@ -7882,9 +7844,9 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>(12.845249304105625, 12.845249304105625)</pre>
+<pre>(1.6056561630132031, 1.6056561630132031)</pre>
 </div>
 </div>
 </div>
@@ -7894,7 +7856,7 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">p_парц_окр</span> <span class="o">-</span> <span class="n">p_парц_сух</span>  <span class="c1"># Перепад парциального давления пара снаружи и внутри трубопровода сжатого воздуха, Па</span>
@@ -7908,9 +7870,9 @@ PE-RT (ПЭ-ПТ) - полиэтилен повышенной термостой
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>1409.0304601558717</pre>
+<pre>1420.270053296964</pre>
 </div>
 </div>
 </div>
