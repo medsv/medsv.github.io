@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Онлайн сервисы</title>
+    <!-- Подключение фавикона в формате PNG -->
+    <link rel="icon" type="image/png" href="tools.png">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #1e293b;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 640px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .desc {
+      color: #64748b;
+      margin: 0;
+    }
+
+    .cards {
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn svg {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 14px;
+      fill: currentColor;
+    }
+
+    .btn span {
+      vertical-align: middle;
+    }
+
+    .btn-pdf-to-xlsx { background-color: #0ea5e9; }
+    .btn-pdf-to-xlsx:hover { background-color: #0284c7; }
+
+    .btn-compare { background-color: #f59e0b; }
+    .btn-compare:hover { background-color: #d97706; }
+
+    .btn-cable-journal { background-color: #10b981; }
+    .btn-cable-journal:hover { background-color: #059669; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Онлайн сервисы</h1>
+      <p class="desc">Для работы с сервисами требуется доступ в интернет</p>
+    </header>
+
+    <div class="cards">
+      <!-- Кнопка 1: Конвертация спецификации PDF → XLSX -->
+      <div class="card">
+        <a href="https://spec-pdf-to-xlsx.streamlit.app/" class="btn btn-pdf-to-xlsx" target="_blank" rel="noopener noreferrer">
+        <span>📄 Конвертация спецификации из PDF в XLSX</span>
+        </a>
+      </div>
+
+      <!-- Кнопка 3: Конвертация кабельного журнала PDF → XLSX -->
+      <div class="card">
+        <a href="https://cs-pdf-to-xlsx.streamlit.app/" class="btn btn-cable-journal" target="_blank" rel="noopener noreferrer">
+          <span>📘 Конвертация кабельного журнала из PDF в XLSX</span>
+        </a>
+      </div>
+    </div>
+
+      <!-- Кнопка 2: Сравнение двух спецификаций XLSX -->
+      <!--
+      <div class="card">
+        <a href="https://xlsx-spec-compare.streamlit.app/" class="btn btn-compare" target="_blank" rel="noopener noreferrer">
+          <span>🔍 Сравнение двух спецификаций (актуальная vs предыдущая)</span>
+        </a>
+      </div>
+      -->
+
+<footer style="text-align: center; margin-top: 40px; color: #64748b; font-size: 14px;">
+</footer>
+  </div>
+</body>
+</html>
