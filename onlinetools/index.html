@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Онлайн сервисы</title>
+  <title>Онлайн инструменты для работы с РД</title>
 	<!-- Подключение фавикона в формате PNG -->
 	<link rel="icon" type="image/png" href="tools.png">
 	<!-- Yandex.Metrika counter -->
@@ -20,115 +20,145 @@
 	</script>
 	<noscript><div><img src="https://mc.yandex.ru/watch/70084201" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	<!-- /Yandex.Metrika counter -->
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --text: #1e293b;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
 
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
+  body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
 
-    .page {
-      width: 100%;
-      max-width: 640px;
-      padding: 24px;
-      box-sizing: border-box;
-    }
+  .page {
+    width: 100%;
+    max-width: 640px;
+    padding: 24px;
+    box-sizing: border-box;
+  }
 
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
 
-    h1 {
-      margin: 0 0 8px 0;
-      font-size: 28px;
-      line-height: 1.3;
-    }
+  h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    line-height: 1.3;
+  }
 
-    .desc {
-      color: #64748b;
-      margin: 0;
-    }
+  .desc {
+    color: #64748b;
+    margin: 0;
+  }
 
-    .cards {
-      display: grid;
-      gap: 20px;
-    }
+  .cards {
+    display: grid;
+    gap: 20px;
+  }
 
-    .card {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+  .card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
 
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 18px;
-      border-radius: 12px;
-      text-decoration: none;
-      color: white;
-      font-weight: 600;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-    }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .btn svg {
-      width: 24px;
-      height: 24px;
-      vertical-align: middle;
-      margin-right: 14px;
-      fill: currentColor;
-    }
+  .btn svg {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 14px;
+    fill: currentColor;
+  }
 
-    .btn span {
-      vertical-align: middle;
-    }
+  .btn span {
+    vertical-align: middle;
+  }
 
-    .btn-pdf-to-xlsx { background-color: #0ea5e9; }
-    .btn-pdf-to-xlsx:hover { background-color: #0284c7; }
+  /* Существующие кнопки */
+  .btn-pdf-to-xlsx { background-color: #0ea5e9; }
+  .btn-pdf-to-xlsx:hover { background-color: #0284c7; }
 
-    .btn-compare { background-color: #f59e0b; }
-    .btn-compare:hover { background-color: #d97706; }
+  .btn-compare { background-color: #f59e0b; }
+  .btn-compare:hover { background-color: #d97706; }
 
-    .btn-cable-journal { background-color: #10b981; }
-    .btn-cable-journal:hover { background-color: #059669; }
-  </style>
-</head>
+  .btn-cable-journal { background-color: #10b981; }
+  .btn-cable-journal:hover { background-color: #059669; }
+
+  /* Новые кнопки (палитра из 10 цветов) */
+  .btn-excel-tools { background-color: #8b5cf6; } /* Индиго */
+  .btn-excel-tools:hover { background-color: #7c3aed; }
+
+  .btn-image-convert { background-color: #ec4899; } /* Розовый */
+  .btn-image-convert:hover { background-color: #db2777; }
+
+  .btn-text-analyze { background-color: #3b82f6; } /* Синий */
+  .btn-text-analyze:hover { background-color: #2563eb; }
+
+  .btn-data-clean { background-color: #f97316; } /* Оранжево-красный */
+  .btn-data-clean:hover { background-color: #ea580c; }
+
+  .btn-report-gen { background-color: #14b8a6; } /* Бирюзовый */
+  .btn-report-gen:hover { background-color: #0f9990; }
+
+  .btn-file-merge { background-color: #6366f1; } /* Фиолетовый */
+  .btn-file-merge:hover { background-color: #4f46e5; }
+
+  .btn-csv-export { background-color: #16a34a; } /* Темно-зеленый */
+  .btn-csv-export:hover { background-color: #15803d; }
+</style>
+
 <body>
   <div class="page">
     <header>
-      <h1>Онлайн сервисы</h1>
-      <p class="desc">Для работы с сервисами требуется доступ в интернет</p>
+      <h1>Онлайн инструменты</h1>
+      <p class="desc">Онлайн инструменты для работы с рабочей документацией (РД)</p>
     </header>
 
     <div class="cards">
       <!-- Кнопка 1: Конвертация спецификации PDF → XLSX -->
       <div class="card">
         <a href="https://spec-pdf-to-xlsx.streamlit.app/" class="btn btn-pdf-to-xlsx" target="_blank" rel="noopener noreferrer">
-        <span>📄 Конвертация спецификации из PDF в XLSX</span>
+          <span>📄 Конвертация спецификации из PDF в XLSX</span>
+        </a>
+      </div>
+
+      <!-- Кнопка 2: Сравнение двух спецификаций XLSX -->
+      <div class="card">
+        <a href="https://xlsx-spec-compare.streamlit.app/" class="btn btn-compare" target="_blank" rel="noopener noreferrer">
+          <span>🔍 Сравнение двух спецификаций (актуальной с предыдущей)</span>
         </a>
       </div>
 
@@ -138,19 +168,63 @@
           <span>📘 Конвертация кабельного журнала из PDF в XLSX</span>
         </a>
       </div>
-    </div>
 
-      <!-- Кнопка 2: Сравнение двух спецификаций XLSX -->
-      <!--
+      <!-- Кнопка 4: Извлечение перечня НТД -->      
       <div class="card">
-        <a href="https://xlsx-spec-compare.streamlit.app/" class="btn btn-compare" target="_blank" rel="noopener noreferrer">
-          <span>🔍 Сравнение двух спецификаций (актуальная vs предыдущая)</span>
+        <a href="https://gosts-extraction.streamlit.app/" class="btn btn-excel-tools" target="_blank" rel="noopener noreferrer">
+          <span>📜 Извлечение перечня НТД из pdf/docx документов</span>
         </a>
       </div>
-      -->
 
-<footer style="text-align: center; margin-top: 40px; color: #64748b; font-size: 14px;">
-</footer>
+<!--     
+      <div class="card">
+        <a href="#" class="btn btn-image-convert" target="_blank" rel="noopener noreferrer">
+          <span>🖼 Конвертация и обработка изображений</span>
+        </a>
+      </div>
+
+      
+      <div class="card">
+        <a href="#" class="btn btn-text-analyze" target="_blank" rel="noopener noreferrer">
+          <span>📝 Анализ и извлечение текста из документов</span>
+        </a>
+      </div>
+
+      
+      <div class="card">
+        <a href="#" class="btn btn-data-clean" target="_blank" rel="noopener noreferrer">
+          <span>🧹 Очистка и нормализация данных</span>
+        </a>
+      </div>
+
+     
+      <div class="card">
+        <a href="#" class="btn btn-report-gen" target="_blank" rel="noopener noreferrer">
+          <span>📋 Генерация сводных отчетов</span>
+        </a>
+      </div>
+
+      
+      <div class="card">
+        <a href="#" class="btn btn-file-merge" target="_blank" rel="noopener noreferrer">
+          <span>📎 Объединение файлов в один документ</span>
+        </a>
+      </div>
+
+     
+      <div class="card">
+        <a href="#" class="btn btn-csv-export" target="_blank" rel="noopener noreferrer">
+          <span>💾 Экспорт данных в формат CSV</span>
+        </a>
+      </div>	
+-->
+
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #64748b; font-size: 14px;">
+      2026, С.В. Медведев, engpython@yandex.ru
+    </footer>
   </div>
 </body>
 </html>
+
